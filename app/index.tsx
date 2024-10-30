@@ -1,38 +1,34 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Link } from 'expo-router';
 
 export default function Index() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.miniContainer}>
-        <Text style={styles.text}>Hello World</Text>
-      </View>
-      <View style={styles.miniContainer}>
-        <Text style={styles.text}>Hello World, but 2</Text>
-      </View>
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<Text style={styles.text}>Bienvenido a Stronger</Text>
+				<Link href="/social" style={styles.button}>
+					Go to Social
+				</Link>
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#25292e",
-    height: "100%",
-  },
-  text: {
-    fontSize: 50,
-    color: "white",
-  },
-  miniContainer: { 
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 10,
-    borderColor: "red",
-    width: "100%",
-  },
+	container: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		height: "100%",
+	},
+	text: {
+		fontSize: 50,
+		color: "black",
+	},
+	button: {
+		borderRadius: 5,
+		fontSize: 20,
+		textDecorationLine: "underline",
+		color: "black",
+	}
 });
