@@ -7,7 +7,7 @@ export default function Social() {
     const colorScheme = useColorSchemeListener();
 
     return (
-        <View style={}>
+        <View style={styles.container}>
             <Text style={{ fontSize: 50 }}>Blank</Text>
         </View>
     );
