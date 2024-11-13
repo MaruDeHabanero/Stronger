@@ -1,9 +1,16 @@
 import { Text, View, StyleSheet } from "react-native";
+import { useColorSchemeListener } from "@/utils/colorSchemeListener"; // Importar el hook
+import Colors from "../../constants/Colors";
+import { useTheme } from '@/utils/OscuroClaroContext';
 
-export default function Social() {
+export default function Perfil() {
+	const { theme } = useTheme();
+	const backgroundColor = theme === "dark" ? Colors.dark.background : Colors.light.background;
+	const color = theme === "dark" ? Colors.dark.text : Colors.light.text;
+
     return (
-        <View style={styles.container}>
-            <Text style={{ fontSize: 50 }}>Blank</Text>
+        <View style={[styles.container, {backgroundColor}]}>
+            <Text style={[{color}]}>Blank</Text>
         </View>
     );
 }
@@ -13,7 +20,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "center", 
         height: "100%",
     },
 });
