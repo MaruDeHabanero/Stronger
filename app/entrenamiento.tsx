@@ -2,15 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import routinesData from "@/assets/dataPlantilla.json";
-import { Routine, Exercise } from '@/types/entrenamientos';
+import { Exercise } from '@/types/entrenamientos';
 
-const routines = routinesData as Routine[];
+const ejercicios = routinesData.desgloceRutina as Exercise[];
 
 export default function RoutineDetailScreen() {
   const { NombreRutina } = useLocalSearchParams<{ NombreRutina: string }>();
-  const routine = routines.find((r) => r.NombreRutina === NombreRutina);
 
-  if (!routine) {
+  if (!ejercicios || ejercicios.length === 0) {
+    console.log('No exercises found:', ejercicios);
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>Routine not found</Text>
@@ -18,57 +18,65 @@ export default function RoutineDetailScreen() {
     );
   }
 
-  const renderExercise = ({ item }: { item: Exercise }) => (
-    <View style={styles.exercise}>
-      <Text style={styles.exerciseText}>{item.ejercicio}</Text>
-      <Text style={styles.seriesText}>Series: {item.numeroSeries}</Text>
-    </View>
-  );
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{routine.NombreRutina}</Text>
-      <Text style={styles.date}>Última vez realizado: {routine.UltimaVezRealizado}</Text>
-      <FlatList
-        data={routine.Ejercicios}
-        renderItem={renderExercise}
-        keyExtractor={(item) => item.ejercicio}
-      />
-    </View>
+    <FlatList
+      data={ejercicios}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <View style={styles.exerciseContainer}>
+          <Text style={styles.exerciseText}>{item.ejercicio}</Text>
+          <Text style={styles.noteExcerciseText}>{item.nota}</Text>
+
+          {/* FlatList anidado para las series de cada ejercicio */}
+          <FlatList
+            data={item.series}
+            keyExtractor={(serie, index) => index.toString()}
+            renderItem={({ item: serie }) => (
+              <View style={styles.seriesContainer}>
+                <Text style={styles.seriesText}>
+                  Serie {serie.numeroSerie}: {serie.repeticiones} reps, {serie.peso} kg
+                </Text>
+              </View>
+            )}
+          />
+        </View>
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
+  exerciseContainer: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+  },
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: '#fff',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
+  errorText: {
+    fontSize: 18,
+    color: 'red',
+    textAlign: 'center',
   },
-  date: {
+  exerciseText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  noteExcerciseText: {
     fontSize: 16,
     color: '#666',
     marginBottom: 16,
   },
-  exercise: {
-    padding: 10,
-    marginBottom: 8,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 5,
-  },
-  exerciseText: {
-    fontSize: 18,
+  seriesContainer: {
+    paddingVertical: 4,
+    paddingLeft: 16,
   },
   seriesText: {
     fontSize: 14,
-    color: '#888',
-  },
-  errorText: {
-    fontSize: 18,
-    color: 'red',
+    color: '#333',
   },
 });

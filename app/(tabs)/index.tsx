@@ -9,7 +9,7 @@ import routinesData from "@/assets/dataPlantilla.json";
 export default function Index() {
 
 	// Rutas de las plantillas
-	const routines = routinesData as Routine[];
+	const routines = routinesData.rutinas as Routine[];
 
 	const { theme } = useTheme();
 	// Elementos generales para el Dark Mode

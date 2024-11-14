@@ -1,56 +1,121 @@
-[
-    {
-        "NombreRutina": "Pierna de Lunes",
-        "UltimaVezRealizado": "2024-11-06",
-        "Ejercicios": [
-            {
-                "ejercicio": "Sentadilla",
-                "numeroSeries": 4
-            },
-            {
-                "ejercicio": "Prensa de pierna",
-                "numeroSeries": 3
-            },
-            {
-                "ejercicio": "Extensión de pierna",
-                "numeroSeries": 3
-            }
-        ]
-    },
-    {
-        "NombreRutina": "Espalda y Bíceps",
-        "UltimaVezRealizado": "2024-11-08",
-        "Ejercicios": [
-            {
-                "ejercicio": "Dominadas",
-                "numeroSeries": 3
-            },
-            {
-                "ejercicio": "Remo con barra",
-                "numeroSeries": 4
-            },
-            {
-                "ejercicio": "Curl de bíceps con mancuernas",
-                "numeroSeries": 3
-            }
-        ]
-    },
-    {
-        "NombreRutina": "Pecho y Tríceps",
-        "UltimaVezRealizado": "2024-11-10",
-        "Ejercicios": [
-            {
-                "ejercicio": "Press de banca",
-                "numeroSeries": 4
-            },
-            {
-                "ejercicio": "Aperturas con mancuernas",
-                "numeroSeries": 3
-            },
-            {
-                "ejercicio": "Fondos de tríceps",
-                "numeroSeries": 3
-            }
-        ]
-    }
-]
+{
+    "rutinas": [
+        {
+            "idRutina": 1,
+            "NombreRutina": "Pierna de Lunes",
+            "UltimaVezRealizado": "2024-11-06",
+            "Ejercicios": [
+                {
+                    "ejercicio": "Sentadilla",
+                    "numeroSeries": 4
+                },
+                {
+                    "ejercicio": "Prensa de pierna",
+                    "numeroSeries": 3
+                },
+                {
+                    "ejercicio": "Extensión de pierna",
+                    "numeroSeries": 3
+                }
+            ]
+        },
+        {
+            "idRutina": 2,
+            "NombreRutina": "Espalda y Bíceps",
+            "UltimaVezRealizado": "2024-11-08",
+            "Ejercicios": [
+                {
+                    "ejercicio": "Dominadas",
+                    "numeroSeries": 3
+                },
+                {
+                    "ejercicio": "Remo con barra",
+                    "numeroSeries": 4
+                },
+                {
+                    "ejercicio": "Curl de bíceps con mancuernas",
+                    "numeroSeries": 3
+                }
+            ]
+        },
+        {
+            "idRutina": 3,
+            "NombreRutina": "Pecho y Tríceps",
+            "UltimaVezRealizado": "2024-11-10",
+            "Ejercicios": [
+                {
+                    "ejercicio": "Press de banca",
+                    "numeroSeries": 4
+                },
+                {
+                    "ejercicio": "Aperturas con mancuernas",
+                    "numeroSeries": 3
+                },
+                {
+                    "ejercicio": "Fondos de tríceps",
+                    "numeroSeries": 3
+                }
+            ]
+        }
+    ],
+    "desgloceRutina": [
+        {
+            "ejercicio": "Press de banca",
+            "nota": "Ejercicio para pectorales y tríceps",
+            "series": [
+                {
+                    "numeroSerie": 1,
+                    "repeticiones": 12,
+                    "peso": 50
+                },
+                {
+                    "numeroSerie": 2,
+                    "repeticiones": 10,
+                    "peso": 55
+                },
+                {
+                    "numeroSerie": 3,
+                    "repeticiones": 8,
+                    "peso": 60
+                }
+            ]
+        },
+        {
+            "ejercicio": "Curl de bíceps",
+            "nota": "Aislamiento de bíceps",
+            "series": [
+                {
+                    "numeroSerie": 1,
+                    "repeticiones": 15,
+                    "peso": 20
+                },
+                {
+                    "numeroSerie": 2,
+                    "repeticiones": 12,
+                    "peso": 22
+                }
+            ]
+        },
+        {
+            "ejercicio": "Sentadilla",
+            "nota": "Desarrolla fuerza en piernas y glúteos",
+            "series": [
+                {
+                    "numeroSerie": 1,
+                    "repeticiones": 10,
+                    "peso": 80
+                },
+                {
+                    "numeroSerie": 2,
+                    "repeticiones": 8,
+                    "peso": 90
+                },
+                {
+                    "numeroSerie": 3,
+                    "repeticiones": 6,
+                    "peso": 95
+                } 
+            ] 
+        }
+    ]
+}
