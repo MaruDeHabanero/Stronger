@@ -1,0 +1,56 @@
+[
+    {
+        "NombreRutina": "Pierna de Lunes",
+        "UltimaVezRealizado": "2024-11-06",
+        "Ejercicios": [
+            {
+                "ejercicio": "Sentadilla",
+                "numeroSeries": 4
+            },
+            {
+                "ejercicio": "Prensa de pierna",
+                "numeroSeries": 3
+            },
+            {
+                "ejercicio": "Extensión de pierna",
+                "numeroSeries": 3
+            }
+        ]
+    },
+    {
+        "NombreRutina": "Espalda y Bíceps",
+        "UltimaVezRealizado": "2024-11-08",
+        "Ejercicios": [
+            {
+                "ejercicio": "Dominadas",
+                "numeroSeries": 3
+            },
+            {
+                "ejercicio": "Remo con barra",
+                "numeroSeries": 4
+            },
+            {
+                "ejercicio": "Curl de bíceps con mancuernas",
+                "numeroSeries": 3
+            }
+        ]
+    },
+    {
+        "NombreRutina": "Pecho y Tríceps",
+        "UltimaVezRealizado": "2024-11-10",
+        "Ejercicios": [
+            {
+                "ejercicio": "Press de banca",
+                "numeroSeries": 4
+            },
+            {
+                "ejercicio": "Aperturas con mancuernas",
+                "numeroSeries": 3
+            },
+            {
+                "ejercicio": "Fondos de tríceps",
+                "numeroSeries": 3
+            }
+        ]
+    }
+]

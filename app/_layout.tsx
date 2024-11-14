@@ -3,13 +3,11 @@ import { Poppins_400Regular, Poppins_600SemiBold, useFonts } from "@expo-google-
 import {useEffect} from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { ThemeProvider } from "@/utils/OscuroClaroContext";
-import { useColorSchemeListener } from "@/utils/colorSchemeListener";
-import Colors from "@/constants/Colors";
+import { NavigationContainer } from "@react-navigation/native";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-	const colorScheme = useColorSchemeListener();
 
 	const [loaded, error] = useFonts({
 		Poppins_400Regular,
@@ -27,7 +25,8 @@ export default function RootLayout() {
 	  }
 
     return (
-		<ThemeProvider>
+		// El Theme Provider es el que se encarga de cambiar el tema de la aplicación
+		<ThemeProvider> 
 			<Stack>
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 				<Stack.Screen name="entrenamiento" options={{ headerTitle: "Nuevo Entrenamiento", presentation: "modal", headerStyle: {backgroundColor: "tomato"}}}/>

@@ -3,12 +3,10 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useColorSchemeListener } from "@/utils/colorSchemeListener";
 import Colors from "../../constants/Colors";
-import { ThemeProvider } from "@/utils/OscuroClaroContext";
 
 export default function TabLayout() {
     const colorScheme = useColorSchemeListener();
     return (
-        <ThemeProvider>
             <Tabs
                 screenOptions={{
                     tabBarActiveTintColor: "tomato",
@@ -97,8 +95,6 @@ export default function TabLayout() {
                             ),
                     }}
                 />
-
             </Tabs>
-        </ThemeProvider>
     );
 }
