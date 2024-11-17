@@ -5,6 +5,11 @@ import routinesData from "@/assets/dataPlantilla.json";
 import { Exercise } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
 
+// Componentes para el modo oscuro y claro
+import { Vista } from "@/components/Vista";
+import { Texto } from "@/components/Texto";
+
+
 const ejercicios = routinesData.desgloceRutina as Exercise[];
 
 export default function RoutineDetailScreen() {
@@ -16,36 +21,38 @@ export default function RoutineDetailScreen() {
         console.log("No exercises found:", ejercicios);
         return (
             <View style={styles.container}>
-                <Text style={styles.errorText}>Routine not found</Text>
+                <Text style={styles.errorText}>Rutina no encontrada!</Text>
             </View>
         );
     }
 
     return (
-        <FlatList
-            data={ejercicios}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-                <View style={styles.exerciseContainer}>
-                    <Text style={styles.exerciseText}>{item.ejercicio}</Text>
-                    <Text style={styles.noteExcerciseText}>{item.nota}</Text>
+		<Vista style={{display: "flex", height: "100%"}}>
+			<FlatList
+				data={ejercicios}
+				keyExtractor={(item, index) => index.toString()}
+				renderItem={({ item }) => (
+					<Vista style={styles.exerciseContainer}>
+						<Texto style={styles.exerciseText}>{item.ejercicio}</Texto>
+						<Texto style={styles.noteExcerciseText}>{item.nota}</Texto>
 
-                    {/* FlatList anidado para las series de cada ejercicio */}
-                    <FlatList
-                        data={item.series}
-                        keyExtractor={(serie, index) => index.toString()}
-                        renderItem={({ item: serie }) => (
-                            <View style={styles.seriesContainer}>
-                                <Text style={styles.seriesText}>
-                                    Serie {serie.numeroSerie}:{" "}
-                                    {serie.repeticiones} reps, {serie.peso} kg
-                                </Text>
-                            </View>
-                        )}
-                    />
-                </View>
-            )}
-        />
+						{/* FlatList anidado para las series de cada ejercicio */}
+						<FlatList
+							data={item.series}
+							keyExtractor={(serie, index) => index.toString()}
+							renderItem={({ item: serie }) => (
+								<Vista style={styles.seriesContainer}>
+									<Texto style={styles.seriesText}>
+										Serie {serie.numeroSerie}:{" "}
+										{serie.repeticiones} reps, {serie.peso} kg
+									</Texto>
+								</Vista>
+							)}
+						/>
+					</Vista>
+				)}
+			/>
+		</Vista>
     );
 }
 
@@ -56,6 +63,7 @@ const styles = StyleSheet.create({
         borderColor: "#ddd",
 		margin: 10,
 		borderWidth: 1,
+		borderRadius: 10,
     },
     container: {
         flex: 1,
@@ -83,6 +91,5 @@ const styles = StyleSheet.create({
     },
     seriesText: {
         fontSize: 14,
-        color: "#333",
     },
 });

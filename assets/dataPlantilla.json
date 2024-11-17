@@ -93,7 +93,12 @@
                     "numeroSerie": 2,
                     "repeticiones": 12,
                     "peso": 22
-                }
+                },
+				{
+					"numeroSerie": 3,
+					"repeticiones": 10,
+					"peso": 24
+				}
             ]
         },
         {

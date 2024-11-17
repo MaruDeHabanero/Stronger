@@ -6,47 +6,57 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Routine } from "@/types/entrenamientos";
 import routinesData from "@/assets/dataPlantilla.json";
 
+// Componentes para el modo oscuro y claro
+import { Vista } from "@/components/Vista";
+import { Texto } from "@/components/Texto";
+
 export default function Index() {
+    const { theme } = useTheme();
 
-	// Rutas de las plantillas
-	const routines = routinesData.rutinas as Routine[];
+    const plantillaBorder =
+        theme === "dark" ? Colors.light.background : Colors.dark.background;
 
-	const { theme } = useTheme();
-	// Elementos generales para el Dark Mode
-	const backgroundColor = theme === "dark" ? Colors.dark.background : Colors.light.background;
-	const color = theme === "dark" ? Colors.dark.text : Colors.light.text;
-
-	// Color del borde de la plantilla
-	const plantillaBorder = theme === "dark" ? Colors.light.background : Colors.dark.background;
+    const routines = routinesData.rutinas as Routine[];
 
     const renderRoutine = ({ item }: { item: Routine }) => (
-		<Link
-			href={`/entrenamiento`}
-			style={styles.square}
-		>
-		  <Text>{item.NombreRutina}</Text>
-		  <Text>Última vez: {item.UltimaVezRealizado}</Text>
-		</Link>
-	  );
+        <Link href={`/entrenamiento`}>
+            <Vista style={{borderColor: "white", borderWidth: 1, width: "100%"}}>
+                <Texto style={[styles.subtitle, { fontSize: 25, marginTop: 0}]}>
+                    {item.NombreRutina}
+                </Texto>
+                <Texto>Última vez: {item.UltimaVezRealizado}</Texto>
+                <FlatList
+                    data={item.Ejercicios}
+                    keyExtractor={(item) => item.ejercicio}
+                    renderItem={({ item }) => (
+                        <Texto>
+                            {"    "}
+                            {item.ejercicio}
+                        </Texto>
+                    )}
+                />
+            </Vista>
+        </Link>
+    );
 
     return (
-        <View style={[styles.container, { backgroundColor }]}>
-            <Text style={[styles.title, { color }]}>Stronger</Text>
-            <Link href="/entrenamiento" style={[styles.button, { color }]}>
+        <Vista style={styles.container}>
+            <Texto style={styles.title}>Stronger</Texto>
+            <Link href="/entrenamiento" style={styles.nuevoEntrenamiento}>
                 Nuevo Entrenamiento
             </Link>
-            <Text style={[styles.subtitle, { color }]}>Plantillas</Text>
-            <View style={[styles.plantilla, { borderColor: plantillaBorder }]}>
+            <Texto style={styles.subtitle}>Plantillas</Texto>
+            <Vista style={[styles.plantillaBox, { borderColor: plantillaBorder }]}>
                 <FlatList
                     data={routines}
-                    renderItem={renderRoutine}
                     keyExtractor={(item) => item.NombreRutina}
+                    renderItem={renderRoutine}
                 />
-            </View>
-            <Link href="/entrenamiento" style={[styles.plusSign]}>
+            </Vista>
+            <Link href="/entrenamiento" style={styles.plusSign}>
                 <AntDesign name="plussquare" size={30} color="tomato" />
             </Link>
-        </View>
+        </Vista>
     );
 }
 
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
         fontFamily: "Poppins_400Regular",
         marginTop: 20,
     },
-    button: {
+    nuevoEntrenamiento: {
         padding: 12,
         marginTop: 20,
         textAlign: "center",
@@ -82,17 +92,19 @@ const styles = StyleSheet.create({
         alignSelf: "flex-end",
         padding: 10,
     },
-    plantilla: {
+    plantillaBox: {
         width: "100%",
         borderWidth: 1,
         borderRadius: 5,
         padding: 10,
     },
-	square: {
-		backgroundColor: '#e0e0e0',
-		padding: 20,
-		borderRadius: 8,
-		marginBottom: 12,
-		alignItems: 'center',
-	  },
+    square: {
+        backgroundColor: "#e0e0e0",
+        padding: 20,
+        borderRadius: 8,
+        marginTop: 5,
+        marginBottom: 5,
+        display: "flex",
+        flexDirection: "column",
+    },
 });
