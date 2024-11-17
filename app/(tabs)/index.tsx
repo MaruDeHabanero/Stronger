@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList, Button } from "react-native";
 import { Link } from "expo-router";
 import Colors from "../../constants/Colors";
 import { useTheme } from "@/utils/OscuroClaroContext";
@@ -19,24 +19,23 @@ export default function Index() {
     const routines = routinesData.rutinas as Routine[];
 
     const renderRoutine = ({ item }: { item: Routine }) => (
-        <Link href={`/entrenamiento`}>
-            <Vista style={{borderColor: "white", borderWidth: 1, width: "100%"}}>
-                <Texto style={[styles.subtitle, { fontSize: 25, marginTop: 0}]}>
-                    {item.NombreRutina}
-                </Texto>
-                <Texto>Última vez: {item.UltimaVezRealizado}</Texto>
-                <FlatList
-                    data={item.Ejercicios}
-                    keyExtractor={(item) => item.ejercicio}
-                    renderItem={({ item }) => (
-                        <Texto>
-                            {"    "}
-                            {item.ejercicio}
-                        </Texto>
-                    )}
-                />
-            </Vista>
-        </Link>
+		<Vista style={[styles.square, {borderColor: plantillaBorder}]}>
+			<Link href={`/entrenamiento`}>
+					<Texto style={[styles.subtitle, {fontSize: 25}]}>
+						{item.NombreRutina}{"\n"}
+					</Texto>
+					<Texto>Última vez: {item.UltimaVezRealizado}{"\n"}</Texto>
+					<FlatList
+						data={item.Ejercicios}
+						keyExtractor={(item) => item.ejercicio}
+						renderItem={({ item }) => (
+							<Texto style={{color: "gray"}}>
+								{item.numeroSeries}x {item.ejercicio}
+							</Texto>
+						)}
+					/>
+			</Link>
+		</Vista>
     );
 
     return (
@@ -96,15 +95,12 @@ const styles = StyleSheet.create({
         width: "100%",
         borderWidth: 1,
         borderRadius: 5,
-        padding: 10,
+		padding: 10,
     },
     square: {
-        backgroundColor: "#e0e0e0",
-        padding: 20,
         borderRadius: 8,
-        marginTop: 5,
-        marginBottom: 5,
-        display: "flex",
-        flexDirection: "column",
+		borderWidth: 1,
+		marginVertical: 5,
+		padding: 10,
     },
 });
