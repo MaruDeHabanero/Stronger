@@ -45,7 +45,7 @@ export default function Index() {
                 Nuevo Entrenamiento
             </Link>
             <Texto style={styles.subtitle}>Plantillas</Texto>
-            <Vista style={[styles.plantillaBox, { borderColor: plantillaBorder }]}>
+            <Vista style={styles.plantillaBox}>
                 <FlatList
                     data={routines}
                     keyExtractor={(item) => item.NombreRutina}
@@ -93,9 +93,6 @@ const styles = StyleSheet.create({
     },
     plantillaBox: {
         width: "100%",
-        borderWidth: 1,
-        borderRadius: 5,
-		padding: 10,
     },
     square: {
         borderRadius: 8,
