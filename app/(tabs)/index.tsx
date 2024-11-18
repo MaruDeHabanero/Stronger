@@ -5,14 +5,13 @@ import { useTheme } from "@/utils/OscuroClaroContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Routine } from "@/types/entrenamientos";
 import routinesData from "@/assets/dataPlantilla.json";
-
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
 import { Texto } from "@/components/Texto";
 
 export default function Index() {
     const { theme } = useTheme();
-
+  
     const plantillaBorder =
         theme === "dark" ? Colors.light.background : Colors.dark.background;
 

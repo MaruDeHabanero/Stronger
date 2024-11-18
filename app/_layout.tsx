@@ -4,8 +4,11 @@ import {useEffect} from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { ThemeProvider } from "@/utils/OscuroClaroContext";
 import { NavigationContainer } from "@react-navigation/native";
-
+import * as DB from '../services/DatabaseService'
 SplashScreen.preventAutoHideAsync();
+
+DB.createTables();
+
 
 export default function RootLayout() {
 
@@ -19,7 +22,10 @@ export default function RootLayout() {
 		  SplashScreen.hideAsync();
 		}
 	  }, [loaded, error]);
-	
+	  
+	  DB.obtenerGrupoMuscular().then(res=>{
+		console.log(res);
+	  });
 	  if (!loaded && !error) {
 		return null;
 	  }
