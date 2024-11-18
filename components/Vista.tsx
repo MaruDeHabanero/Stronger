@@ -11,7 +11,8 @@ interface ViewComponentProps {
 
 export const Vista: React.FC<ViewComponentProps> = ({ children, style }) => {
     const { theme } = useTheme();
-    const backgroundColor = theme === "dark" ? Colors.dark.background : Colors.light.background;
+    const backgroundColor =
+        theme === "dark" ? Colors.dark.background : Colors.light.background;
 
     return <View style={[{ backgroundColor }, style]}>{children}</View>;
 };

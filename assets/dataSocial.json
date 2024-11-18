@@ -1,0 +1,116 @@
+{
+	"posts": [
+	  {
+		"nombreUsuario": "Carlos123",
+		"tiempoDesde": "2 horas",
+		"textoPost": "Logré levantar 100kg en sentadillas, ¡10 repeticiones completadas! 🏋️‍♂️💪",
+		"ejercicio": "Sentadillas",
+		"peso": 100,
+		"unidades": "kg",
+		"repeticiones": 10,
+		"likes": 35,
+		"imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.musculosespartanos.com%2Fwp-content%2Fuploads%2F2020%2F05%2Fsentadilla.jpg&f=1&nofb=1&ipt=398fe6b2c5aa9930b91eaaa1d361aef6462f4d27310b795835b8c4920cd3f910&ipo=images"
+	  },
+	  {
+		"nombreUsuario": "MariaFit",
+		"tiempoDesde": "1 día",
+		"textoPost": "¡Hoy alcancé los 80lbs en press de banca! Realicé 8 repeticiones con buena forma. 🔥",
+		"ejercicio": "Press de banca",
+		"peso": 80,
+		"unidades": "lbs",
+		"repeticiones": 8,
+		"likes": 42
+	  },
+	  {
+		"nombreUsuario": "FitnessGeek",
+		"tiempoDesde": "3 días",
+		"textoPost": "¡Increíble! Levanté 120kg en peso muerto, completando 5 repeticiones con esfuerzo. 🏋️‍♂️",
+		"ejercicio": "Peso muerto",
+		"peso": 120,
+		"unidades": "kg",
+		"repeticiones": 5,
+		"likes": 58
+	  },
+	  {
+		"nombreUsuario": "JavierPower",
+		"tiempoDesde": "5 días",
+		"textoPost": "Alcancé mi objetivo de 150lbs en press militar, 6 repeticiones con buena técnica. 💥",
+		"ejercicio": "Press militar",
+		"peso": 150,
+		"unidades": "lbs",
+		"repeticiones": 6,
+		"likes": 75
+	  },
+	  {
+		"nombreUsuario": "StrongmanMax",
+		"tiempoDesde": "12 horas",
+		"textoPost": "¡Nuevo récord! Realicé 5 repeticiones con 250kg en press de pierna. 🦵🔥",
+		"ejercicio": "Press de pierna",
+		"peso": 250,
+		"unidades": "kg",
+		"repeticiones": 5,
+		"likes": 92
+	  },
+	  {
+		"nombreUsuario": "MariaStrong",
+		"tiempoDesde": "6 horas",
+		"textoPost": "Subí mi marca personal en remo con barra a 70kg, 8 repeticiones. 💪",
+		"ejercicio": "Remo con barra",
+		"peso": 70,
+		"unidades": "kg",
+		"repeticiones": 8,
+		"likes": 48
+	  },
+	  {
+		"nombreUsuario": "PowerQueen",
+		"tiempoDesde": "1 día",
+		"textoPost": "¡Gran sesión! Logré levantar 40lbs en curl de bíceps, 12 repeticiones. 💥",
+		"ejercicio": "Curl de bíceps",
+		"peso": 40,
+		"unidades": "lbs",
+		"repeticiones": 12,
+		"likes": 57
+	  },
+	  {
+		"nombreUsuario": "FitnessFan",
+		"tiempoDesde": "3 días",
+		"textoPost": "Aumenté mi peso en jalón al pecho a 90kg, 10 repeticiones sólidas. 🔥",
+		"ejercicio": "Jalón al pecho",
+		"peso": 90,
+		"unidades": "kg",
+		"repeticiones": 10,
+		"likes": 66
+	  },
+	  {
+		"nombreUsuario": "StrongGirl",
+		"tiempoDesde": "5 horas",
+		"textoPost": "Logré 12 repeticiones de extensión de tríceps con 25kg en la máquina. 💪",
+		"ejercicio": "Extensión de tríceps",
+		"peso": 25,
+		"unidades": "kg",
+		"repeticiones": 12,
+		"likes": 41
+	  },
+	  {
+		"nombreUsuario": "GymKing",
+		"tiempoDesde": "7 horas",
+		"textoPost": "Hoy hice 10 repeticiones con 100kg en la máquina de abductores. ¡Gran progreso! 🦵",
+		"ejercicio": "Máquina de abductores",
+		"peso": 100,
+		"unidades": "kg",
+		"repeticiones": 10,
+		"likes": 39
+	  },
+	  {
+		"nombreUsuario": "StrongmanMax",
+		"tiempoDesde": "12 horas",
+		"textoPost": "¡Nueva marca personal! Logré arrastrar un camión de 2 toneladas durante 10 metros. 🚚💪",
+		"ejercicio": "Arrastre de camión",
+		"peso": 2000,
+		"unidades": "kg",
+		"repeticiones": 1,
+		"likes": 92
+	  }
+	]
+  }
+  
