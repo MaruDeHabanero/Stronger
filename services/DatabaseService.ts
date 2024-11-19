@@ -1,13 +1,20 @@
 import * as SQLite from 'expo-sqlite';
+export const db = SQLite.openDatabaseSync('test.db');
 
-const db = SQLite.openDatabaseSync("stronger.db");
-db.execAsync(`
-    PRAGMA journal_mode = WAL;
-    CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY NOT NULL, value TEXT NOT NULL, intValue INTEGER);
-    INSERT INTO test (value, intValue) VALUES ('test1', 123);
-    INSERT INTO test (value, intValue) VALUES ('test2', 456);
-    INSERT INTO test (value, intValue) VALUES ('test3', 789);
-    `);
-export const DatabaseService ={
-    
+export async function createTables(){
+  await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS CatGrupoMuscular(
+        IDGrupoMuscular INTEGER PRIMARY KEY,
+        Nombre TEXT
+      );
+      INSERT INTO CatGrupoMuscular Values(1, 'Test');
+      `
+    );
+}
+
+export async function obtenerGrupoMuscular(){
+  return await db.getAllAsync(`
+      select * from CatGrupoMuscular;
+      `
+    );
 }
