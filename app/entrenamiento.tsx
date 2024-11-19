@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
+import Checkbox from 'expo-checkbox';
 import { useLocalSearchParams } from "expo-router";
 import routinesData from "@/assets/dataPlantilla.json";
 import { Exercise } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
+import Colors from "../constants/Colors";
 
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
@@ -13,6 +15,8 @@ const ejercicios = routinesData.desgloceRutina as Exercise[];
 
 export default function RoutineDetailScreen() {
     const { theme } = useTheme();
+    const colorTexto =
+    theme === "dark" ? Colors.dark.text : Colors.light.text;
 
     const { NombreRutina } = useLocalSearchParams<{ NombreRutina: string }>();
 
@@ -35,8 +39,8 @@ export default function RoutineDetailScreen() {
                         <Texto style={styles.exerciseText}>
                             {item.ejercicio}
                         </Texto>
-						
-						{/* Si hay una nota, se muestra */}
+
+                        {/* Si hay una nota, se muestra */}
                         {item?.nota && (
                             <Text style={styles.noteExcerciseText}>
                                 {item.nota}
@@ -49,11 +53,32 @@ export default function RoutineDetailScreen() {
                             keyExtractor={(serie, index) => index.toString()}
                             renderItem={({ item: serie }) => (
                                 <Vista style={styles.seriesContainer}>
-                                    <Texto style={styles.seriesText}>
-                                        Serie {serie.numeroSerie}:{" "}
-                                        {serie.repeticiones} reps, {serie.peso}{" "}
-                                        kg
-                                    </Texto>
+                                    <View style={styles.row}>
+                                        <Text style={[styles.column, {color: colorTexto}]}>
+                                            {serie.numeroSerie}
+                                        </Text>
+                                        <TextInput
+                                            style={[styles.input]}
+                                            keyboardType="numeric"
+                                            placeholder="Peso (kg)"
+                                            defaultValue={serie.peso?.toString()}
+                                        />
+                                        <TextInput
+                                            style={[styles.input]}
+                                            keyboardType="numeric"
+                                            placeholder="Reps"
+                                            defaultValue={serie.repeticiones?.toString()}
+                                        />
+                                        <Checkbox
+                                            style={styles.checkbox}
+                                            value={false}
+                                            onValueChange={(newValue) =>
+                                                console.log(
+                                                    `Checkbox Serie ${serie.numeroSerie} toggled: ${newValue}`
+                                                )
+                                            }
+                                        />
+                                    </View>
                                 </Vista>
                             )}
                         />
@@ -66,11 +91,10 @@ export default function RoutineDetailScreen() {
 
 const styles = StyleSheet.create({
     exerciseContainer: {
-        padding: 16,
+        padding: 5,
+        paddingBottom: 20,
         borderBottomWidth: 1,
-        borderColor: "#ddd",
         margin: 10,
-        borderWidth: 1,
         borderRadius: 10,
     },
     container: {
@@ -97,7 +121,28 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         paddingLeft: 16,
     },
-    seriesText: {
+    row: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    column: {
+        flex: 0.2,
+        fontSize: 14,
+        marginHorizontal: 1
+    },
+    input: {
+        color: 'gray',
+        textAlign: 'center',
+        flex: 1,
+        borderWidth: 1,
+        borderColor: "#ddd",
+        padding: 8,
+        marginHorizontal: 4,
+        borderRadius: 4,
         fontSize: 14,
     },
+    checkbox:{
+        marginHorizontal:10
+    }
 });
