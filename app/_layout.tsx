@@ -3,11 +3,9 @@ import { Poppins_400Regular, Poppins_600SemiBold, useFonts } from "@expo-google-
 import {useEffect} from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { ThemeProvider } from "@/utils/OscuroClaroContext";
-import { NavigationContainer } from "@react-navigation/native";
-import * as DB from '../services/DatabaseService'
+import * as queries from "../services/DatabaseQueries"
 SplashScreen.preventAutoHideAsync();
 
-DB.createTables();
 
 
 export default function RootLayout() {
@@ -15,29 +13,29 @@ export default function RootLayout() {
 	const [loaded, error] = useFonts({
 		Poppins_400Regular,
 		Poppins_600SemiBold,
-	  });
-	
-	  useEffect(() => {
-		if (loaded || error) {
-		  SplashScreen.hideAsync();
-		}
-	  }, [loaded, error]);
-	  
-	  DB.obtenerGrupoMuscular().then(res=>{
-		console.log(res);
-	  });
-	  if (!loaded && !error) {
-		return null;
-	  }
+	});
 
-    return (
+	useEffect(() => {
+		if (loaded || error) {
+			SplashScreen.hideAsync();
+		}
+	}, [loaded, error]);
+
+	const res = queries.obtenerRutinas();
+	console.log(res);
+
+	if (!loaded && !error) {
+		return null;
+	}
+
+	return (
 		// El Theme Provider es el que se encarga de cambiar el tema de la aplicación
-		<ThemeProvider> 
+		<ThemeProvider>
 			<Stack>
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				<Stack.Screen name="entrenamiento" options={{ headerTitle: "Nuevo Entrenamiento", presentation: "modal", headerStyle: {backgroundColor: "tomato"}}}/>
+				<Stack.Screen name="entrenamiento" options={{ headerTitle: "Nuevo Entrenamiento", presentation: "modal", headerStyle: { backgroundColor: "tomato" } }} />
 				<Stack.Screen name="+not-found" />
 			</Stack>
 		</ThemeProvider>
-    );
+	);
 }
