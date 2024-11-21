@@ -75,33 +75,36 @@ INSERT OR IGNORE INTO Rutina (nombre) VALUES
 ('Rutina de Espalda y Bíceps'),
 ('Rutina de Piernas y Abdominales');
 
+-- Almacena los ejericicios por rutina y cuántas series de cada uno
 CREATE TABLE IF NOT EXISTS RutinaEjercicio(
     orden INTEGER,
     idRutina INTEGER,
     idEjercicio INTEGER,
     numeroSeries INTEGER,
+    idMetrica INTEGER,
     PRIMARY KEY (orden, idRutina, idEjercicio),
     FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina),
-    FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio)
+    FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio),
+    FOREIGN KEY (idMetrica) REFERENCES CatMetrica(idMetrica)
 );
 -- Rutina de Pecho y Tríceps
-INSERT OR IGNORE INTO RutinaEjercicio (IDRutina, IDEjercicio, NumeroSeries) VALUES
-(1, 1, 3),  -- Press de Banca
-(1, 2, 3),  -- Fondos en Paralelas
-(1, 9, 3),  -- Press de Tríceps en Polea Alta
-(1, 10, 3); -- Rompecráneos
+INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSeries, idMetrica) VALUES
+(1, 1, 1, 3, 2),  -- Press de Banca
+(2, 1, 2, 3, 2),  -- Fondos en Paralelas
+(3, 1, 9, 3, 2),  -- Press de Tríceps en Polea Alta
+(4, 1, 10, 3, 1); -- Rompecráneos
 -- Rutina de Espalda y Bíceps
-INSERT OR IGNORE INTO RutinaEjercicio (IDRutina, IDEjercicio, NumeroSeries) VALUES
-(2, 5, 3),  -- Dominadas
-(2, 6, 3),  -- Remo con Barra
-(2, 7, 3),  -- Curl de Bíceps con Barra
-(2, 8, 3);  -- Curl Martillo
+INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSeries, idMetrica) VALUES
+(1, 2, 5, 3, 1),  -- Dominadas
+(3, 2, 6, 3, 1),  -- Remo con Barra
+(3, 2, 7, 3, 1),  -- Curl de Bíceps con Barra
+(4, 2, 8, 3, 1);  -- Curl Martillo
 -- Rutina de Piernas y Abdominales
-INSERT OR IGNORE INTO RutinaEjercicio (IDRutina, IDEjercicio, NumeroSeries) VALUES
-(3, 11, 3), -- Sentadillas con Barra
-(3, 12, 3), -- Prensa de Piernas
-(3, 19, 3), -- Crunch
-(3, 20, 3); -- Plancha
+INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSeries, idMetrica) VALUES
+(1, 3, 11, 3, 1), -- Sentadillas con Barra
+(3, 3, 12, 3, 2), -- Prensa de Piernas
+(3, 3, 19, 3, 2), -- Crunch
+(4, 3, 20, 3, 1); -- Plancha
 
 CREATE TABLE IF NOT EXISTS Sesion(
     idSesion INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -115,7 +118,6 @@ CREATE TABLE IF NOT EXISTS SesionEjercicio(
     orden INTEGER,
     idSesion INTEGER,
     idEjercicio INTEGER,
-    idRutina INTEGER NULL,
     nota TEXT NULL,
     PRIMARY KEY (orden, idSesion, idEjercicio),
     FOREIGN KEY (idSesion) REFERENCES Sesion(idSesion),
@@ -134,3 +136,4 @@ CREATE TABLE IF NOT EXISTS SesionEjercicioSerie(
 );
 `
 );
+

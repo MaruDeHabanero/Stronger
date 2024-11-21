@@ -23,7 +23,7 @@ export default function Index() {
 
     const renderRoutine = ({ item }: { item: Routine }) => (
 		<Vista style={[styles.square, {borderColor: plantillaBorder}]}>
-			<Link href={`/entrenamiento`}>
+			<Link href={`/entrenamiento?idRutina=${item.idRutina}&nombre=${item.nombre}`}>
 					<Texto style={[styles.subtitle, {fontSize: 25}]}>
 						{item.nombre}{"\n"}
 					</Texto>

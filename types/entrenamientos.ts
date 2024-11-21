@@ -1,15 +1,18 @@
 // types.ts
 export interface Set {
 	numeroSerie: number;
-	repeticiones: number;
-	peso: number;
+	repeticiones?: number;
+	peso?: number;
+	hecho?: boolean
 }
 
 export interface Exercise {
 	nombre: string;
-	numeroSeries: number;
+	numeroSeries?: number;
+	orden?: number,
 	nota?: string;
-	series?: Set[];
+	series?: Set[],
+	sufijo?: string //Sufijo de la métrica del ejercicio
 }
 
 export interface Routine {

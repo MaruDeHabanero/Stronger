@@ -1,87 +1,114 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
 import Checkbox from 'expo-checkbox';
 import { useLocalSearchParams } from "expo-router";
 import routinesData from "@/assets/dataPlantilla.json";
-import { Exercise } from "@/types/entrenamientos";
+import { Exercise, Set } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
 import Colors from "../constants/Colors";
+import { obtenerRutinaDetallada } from "@/services/DatabaseQueries"
 
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
 import { Texto } from "@/components/Texto";
 
-const ejercicios = routinesData.desgloceRutina as Exercise[];
 
 export default function RoutineDetailScreen() {
+    const { idRutina, nombre } = useLocalSearchParams();
+    const [ejercicios, setEjercicios] = useState<any>([]);
+
+    // Usamos useEffect para realizar la llamada a la base de datos solo una vez cuando el componente se monta
+    useEffect(() => {
+        const fetchEjercicios = async () => {
+            try {
+                const result = await obtenerRutinaDetallada(idRutina.toString());
+                setEjercicios(result); // Almacenamos los datos obtenidos
+            } catch (error) {
+                console.error("Error al obtener los ejercicios:", error);
+            }
+        };
+
+        fetchEjercicios();
+    }, [idRutina]);
+
     const { theme } = useTheme();
     const colorTexto =
-    theme === "dark" ? Colors.dark.text : Colors.light.text;
+        theme === "dark" ? Colors.dark.text : Colors.light.text;
 
-    const { NombreRutina } = useLocalSearchParams<{ NombreRutina: string }>();
+   
 
-    if (!ejercicios || ejercicios.length === 0) {
-        console.log("No exercises found:", ejercicios);
-        return (
-            <View style={styles.container}>
-                <Text style={styles.errorText}>Rutina no encontrada!</Text>
-            </View>
-        );
-    }
+    const [checkedStates, setCheckedStates] = useState<{ [key: string]: boolean }>({});
+    const handleCheckboxChange = (exerciseIndex: number, serieIndex: number) => {
+        const uniqueKey = `${exerciseIndex}-${serieIndex}`;
+        setCheckedStates((prev) => ({
+            ...prev,
+            [uniqueKey]: !prev[uniqueKey], // Toggle the value
+        }));
+    };
+    
 
     return (
         <Vista style={{ display: "flex", height: "100%" }}>
+            <Texto style={[styles.routineText]}>{nombre ?? 'Nuevo entrenamiento vacío'}</Texto>
             <FlatList
                 data={ejercicios}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
+                renderItem={({ item, index: exerciseIndex }) => (
                     <Vista style={styles.exerciseContainer}>
-                        <Texto style={styles.exerciseText}>
-                            {item.nombre}
-                        </Texto>
+                        {/* Nombre del ejercicio */}
+                        <Texto style={styles.exerciseText}>{item.nombre}</Texto>
 
-                        {/* Si hay una nota, se muestra */}
+                        {/* Nota opcional */}
                         {item?.nota && (
-                            <Text style={styles.noteExcerciseText}>
+                            <Texto style={styles.noteExcerciseText}>
                                 {item.nota}
-                            </Text>
+                            </Texto>
                         )}
 
-                        {/* FlatList anidado para las series de cada ejercicio */}
-                        <FlatList
-                            data={item.series}
-                            keyExtractor={(serie, index) => index.toString()}
-                            renderItem={({ item: serie }) => (
-                                <Vista style={styles.seriesContainer}>
-                                    <View style={styles.row}>
-                                        <Text style={[styles.column, {color: colorTexto}]}>
-                                            {serie.numeroSerie}
-                                        </Text>
-                                        <TextInput
-                                            style={[styles.input]}
-                                            keyboardType="numeric"
-                                            placeholder="Peso (kg)"
-                                            defaultValue={serie.peso?.toString()}
-                                        />
-                                        <TextInput
-                                            style={[styles.input]}
-                                            keyboardType="numeric"
-                                            placeholder="Reps"
-                                            defaultValue={serie.repeticiones?.toString()}
-                                        />
-                                        <Checkbox
-                                            style={styles.checkbox}
-                                            value={false}
-                                            onValueChange={(newValue) =>
-                                                console.log(
-                                                    `Checkbox Serie ${serie.numeroSerie} toggled: ${newValue}`
-                                                )
-                                            }
-                                        />
-                                    </View>
-                                </Vista>
-                            )}
-                        />
+                        {/* Tabla */}
+                        <Vista style={styles.tableContainer}>
+                            {/* Encabezado de la tabla */}
+                            <Vista style={[styles.row]}>
+                                <Texto style={[styles.columnSerieHeader]}>Serie</Texto>
+                                <Texto style={styles.columnInputHeader}>Peso ({item.sufijo})</Texto>
+                                <Texto style={styles.columnInputHeader}>Repeticiones</Texto>
+                                <Texto style={styles.columnCheckboxHeader}> </Texto>
+                            </Vista>
+
+                            {/* Filas de la tabla */}
+                            <FlatList
+                                data={item.series}
+                                keyExtractor={(serie, serieIndex) => `${exerciseIndex}-${serieIndex}`}
+                                renderItem={({ item: serie, index: serieIndex }) => {
+                                    const uniqueKey = `${exerciseIndex}-${serieIndex}`;
+                                    return (
+                                        <Vista style={styles.row}>
+                                            <Texto style={[styles.columnSerie, { color: colorTexto }]}>
+                                                {serie.numeroSerie}
+                                            </Texto>
+                                            <TextInput
+                                                style={styles.columnInput}
+                                                keyboardType="numeric"
+                                                defaultValue={serie.peso?.toString()}
+                                            />
+                                            <TextInput
+                                                style={styles.columnInput}
+                                                keyboardType="numeric"
+                                                defaultValue={serie.repeticiones?.toString()}
+                                            />
+                                            <Checkbox
+                                                style={styles.checkbox}
+                                                value={checkedStates[uniqueKey] ?? serie.hecho}
+                                                onValueChange={() => handleCheckboxChange(exerciseIndex, serieIndex)}
+                                            />
+                                        </Vista>
+                                    )
+                                }}
+                            />
+                            <Texto style={{textAlign: 'center', marginBottom: 20}}>
+                                Agregar serie
+                            </Texto>
+                        </Vista>
                     </Vista>
                 )}
             />
@@ -91,58 +118,70 @@ export default function RoutineDetailScreen() {
 
 const styles = StyleSheet.create({
     exerciseContainer: {
-        padding: 5,
-        paddingBottom: 20,
-        borderBottomWidth: 1,
-        margin: 10,
-        borderRadius: 10,
+        marginHorizontal: 10,
+        marginTop: 5,
     },
-    container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: "#fff",
-    },
-    errorText: {
-        fontSize: 18,
-        color: "red",
-        textAlign: "center",
+    routineText: {
+        fontSize: 25,
+        marginTop: 20,
+        marginHorizontal: 10,
     },
     exerciseText: {
         fontSize: 20,
-        fontWeight: "bold",
-        marginBottom: 4,
+        marginBottom: 2,
     },
     noteExcerciseText: {
         fontSize: 16,
         color: "#666",
         marginBottom: 16,
     },
-    seriesContainer: {
-        paddingVertical: 4,
-        paddingLeft: 16,
+    tableContainer: {
+        paddingVertical: 0,
+    },
+    tableHeader: {
+        paddingVertical: 8,
     },
     row: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
+        marginBottom: 5,
     },
-    column: {
-        flex: 0.2,
+    
+    columnSerie: {
+        flex: 0.22,
         fontSize: 14,
-        marginHorizontal: 1
+        textAlign: "center",
     },
-    input: {
-        color: 'gray',
-        textAlign: 'center',
+    columnSerieHeader: {
+        flex: 0.22,
+        fontSize: 14,
+        textAlign: "center",
+    },
+    columnInput: {
+        backgroundColor: "lightgray",
+        opacity: 0.8,
+        textAlign: "center",
         flex: 1,
         borderWidth: 1,
         borderColor: "#ddd",
         padding: 8,
         marginHorizontal: 4,
-        borderRadius: 4,
+        borderRadius: 20,
         fontSize: 14,
     },
-    checkbox:{
-        marginHorizontal:10
-    }
+    columnInputHeader: {
+        flex: 1,
+        fontSize: 16,
+        textAlign: "center",
+        marginHorizontal: 4,
+    },
+    checkbox: {
+        marginHorizontal: 10,
+    },
+    columnCheckboxHeader: {
+        marginHorizontal: 18,
+
+    },
 });
+
