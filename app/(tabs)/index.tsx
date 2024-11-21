@@ -35,6 +35,7 @@ export default function Index() {
 								{item.numeroSeries}x {item.nombre}
 							</Texto>
 						)}
+
 					/>
 			</Link>
 		</Vista>
@@ -100,6 +101,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
 		borderWidth: 1,
 		marginVertical: 5,
-		padding: 10,
+		paddingTop: 10,
+		paddingBottom: 20,
+		paddingHorizontal: 15,
     },
 });
