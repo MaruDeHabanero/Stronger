@@ -5,6 +5,7 @@ import { useTheme } from "@/utils/OscuroClaroContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Routine } from "@/types/entrenamientos";
 import routinesData from "@/assets/dataPlantilla.json";
+import * as queries from "@/services/DatabaseQueries"
 
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
@@ -16,21 +17,23 @@ export default function Index() {
     const plantillaBorder =
         theme === "dark" ? Colors.light.background : Colors.dark.background;
 
-    const routines = routinesData.rutinas as Routine[];
+    //const routines = routinesData.rutinas as Routine[];
+
+    const routines = queries.obtenerRutinas();
 
     const renderRoutine = ({ item }: { item: Routine }) => (
 		<Vista style={[styles.square, {borderColor: plantillaBorder}]}>
 			<Link href={`/entrenamiento`}>
 					<Texto style={[styles.subtitle, {fontSize: 25}]}>
-						{item.NombreRutina}{"\n"}
+						{item.nombre}{"\n"}
 					</Texto>
-					<Texto>Última vez: {item.UltimaVezRealizado}{"\n"}</Texto>
+					<Texto>Última vez: {item.ultimaVezRealizado}{"\n"}</Texto>
 					<FlatList
-						data={item.Ejercicios}
-						keyExtractor={(item) => item.ejercicio}
+						data={item.ejercicios}
+						keyExtractor={(item) => item.nombre}
 						renderItem={({ item }) => (
 							<Texto style={{color: "gray"}}>
-								{item.numeroSeries}x {item.ejercicio}
+								{item.numeroSeries}x {item.nombre}
 							</Texto>
 						)}
 					/>
@@ -48,7 +51,7 @@ export default function Index() {
             <Vista style={styles.plantillaBox}>
                 <FlatList
                     data={routines}
-                    keyExtractor={(item) => item.NombreRutina}
+                    keyExtractor={(item) => item.nombre}
                     renderItem={renderRoutine}
                 />
             </Vista>

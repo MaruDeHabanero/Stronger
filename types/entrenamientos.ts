@@ -6,7 +6,7 @@ export interface Set {
 }
 
 export interface Exercise {
-	ejercicio: string;
+	nombre: string;
 	numeroSeries: number;
 	nota?: string;
 	series?: Set[];
@@ -14,8 +14,8 @@ export interface Exercise {
 
 export interface Routine {
 	idRutina: number,
-	NombreRutina: string;
-	UltimaVezRealizado: string;
-	Ejercicios: Exercise[];
+	nombre: string;
+	ultimaVezRealizado: string;
+	ejercicios?: Exercise[];
 }
  

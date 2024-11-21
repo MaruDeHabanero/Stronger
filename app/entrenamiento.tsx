@@ -37,7 +37,7 @@ export default function RoutineDetailScreen() {
                 renderItem={({ item }) => (
                     <Vista style={styles.exerciseContainer}>
                         <Texto style={styles.exerciseText}>
-                            {item.ejercicio}
+                            {item.nombre}
                         </Texto>
 
                         {/* Si hay una nota, se muestra */}

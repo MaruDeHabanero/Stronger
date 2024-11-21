@@ -2,57 +2,57 @@
     "rutinas": [
         {
             "idRutina": 1,
-            "NombreRutina": "Pierna de Lunes",
-            "UltimaVezRealizado": "2024-11-06",
-            "Ejercicios": [
+            "nombre": "Pierna de Lunes",
+            "ultimaVezRealizado": "2024-11-06",
+            "ejercicios": [
                 {
-                    "ejercicio": "Sentadilla",
+                    "nombre": "Sentadilla",
                     "numeroSeries": 4
                 },
                 {
-                    "ejercicio": "Prensa de pierna",
+                    "nombre": "Prensa de pierna",
                     "numeroSeries": 3
                 },
                 {
-                    "ejercicio": "Extensión de pierna",
+                    "nombre": "Extensión de pierna",
                     "numeroSeries": 3
                 }
             ]
         },
         {
             "idRutina": 2,
-            "NombreRutina": "Espalda y Bíceps",
-            "UltimaVezRealizado": "2024-11-08",
-            "Ejercicios": [
+            "nombre": "Espalda y Bíceps",
+            "ultimaVezRealizado": "2024-11-08",
+            "ejercicios": [
                 {
-                    "ejercicio": "Dominadas",
+                    "nombre": "Dominadas",
                     "numeroSeries": 3
                 },
                 {
-                    "ejercicio": "Remo con barra",
+                    "nombre": "Remo con barra",
                     "numeroSeries": 4
                 },
                 {
-                    "ejercicio": "Curl de bíceps con mancuernas",
+                    "nombre": "Curl de bíceps con mancuernas",
                     "numeroSeries": 3
                 }
             ]
         },
         {
             "idRutina": 3,
-            "NombreRutina": "Pecho y Tríceps",
-            "UltimaVezRealizado": "2024-11-10",
-            "Ejercicios": [
+            "nombre": "Pecho y Tríceps",
+            "ultimaVezRealizado": "2024-11-10",
+            "ejercicios": [
                 {
-                    "ejercicio": "Press de banca",
+                    "nombre": "Press de banca",
                     "numeroSeries": 4
                 },
                 {
-                    "ejercicio": "Aperturas con mancuernas",
+                    "nombre": "Aperturas con mancuernas",
                     "numeroSeries": 3
                 },
                 {
-                    "ejercicio": "Fondos de tríceps",
+                    "nombre": "Fondos de tríceps",
                     "numeroSeries": 3
                 }
             ]
@@ -60,7 +60,7 @@
     ],
     "desgloceRutina": [
         {
-            "ejercicio": "Press de banca",
+            "nombre": "Press de banca",
             "nota": "Ejercicio para pectorales y tríceps",
             "series": [
                 {
@@ -81,7 +81,7 @@
             ]
         },
         {
-            "ejercicio": "Curl de bíceps",
+            "nombre": "Curl de bíceps",
             "nota": "Aislamiento de bíceps",
             "series": [
                 {
@@ -94,15 +94,15 @@
                     "repeticiones": 12,
                     "peso": 22
                 },
-				{
-					"numeroSerie": 3,
-					"repeticiones": 10,
-					"peso": 24
-				}
+                {
+                    "numeroSerie": 3,
+                    "repeticiones": 10,
+                    "peso": 24
+                }
             ]
         },
         {
-            "ejercicio": "Sentadilla",
+            "nombre": "Sentadilla",
             "nota": "Desarrolla fuerza en piernas y glúteos",
             "series": [
                 {
@@ -119,8 +119,8 @@
                     "numeroSerie": 3,
                     "repeticiones": 6,
                     "peso": 95
-                } 
-            ] 
+                }
+            ]
         }
     ]
 }

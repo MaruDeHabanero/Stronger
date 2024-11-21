@@ -3,10 +3,7 @@ import { Poppins_400Regular, Poppins_600SemiBold, useFonts } from "@expo-google-
 import {useEffect} from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { ThemeProvider } from "@/utils/OscuroClaroContext";
-import * as queries from "../services/DatabaseQueries"
 SplashScreen.preventAutoHideAsync();
-
-
 
 export default function RootLayout() {
 
@@ -20,9 +17,6 @@ export default function RootLayout() {
 			SplashScreen.hideAsync();
 		}
 	}, [loaded, error]);
-
-	const res = queries.obtenerRutinas();
-	console.log(res);
 
 	if (!loaded && !error) {
 		return null;
