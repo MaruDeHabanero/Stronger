@@ -27,7 +27,7 @@ export default function RootLayout() {
 		<ThemeProvider>
 			<Stack>
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				<Stack.Screen name="entrenamiento" options={{ headerTitle: "Nuevo Entrenamiento", presentation: "modal", headerStyle: { backgroundColor: "tomato" } }} />
+				<Stack.Screen name="entrenamiento" options={{ headerTitle: "Nuevo Entrenamiento", presentation: "modal", headerTintColor: 'white', headerStyle: { backgroundColor: "#363636"}, headerTitleStyle: { color: 'white'}, }} />
 				<Stack.Screen name="+not-found" />
 			</Stack>
 		</ThemeProvider>

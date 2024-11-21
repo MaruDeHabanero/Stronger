@@ -1,12 +1,11 @@
 import { Text, View, StyleSheet, FlatList, Button } from "react-native";
 import { Link } from "expo-router";
-import Colors from "../../constants/Colors";
+import {Colors, tomatoCustom} from "../../constants/Colors";
 import { useTheme } from "@/utils/OscuroClaroContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Routine } from "@/types/entrenamientos";
 import routinesData from "@/assets/dataPlantilla.json";
 import * as queries from "@/services/DatabaseQueries"
-
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
 import { Texto } from "@/components/Texto";
@@ -56,7 +55,7 @@ export default function Index() {
                 />
             </Vista>
             <Link href="/entrenamiento" style={styles.plusSign}>
-                <AntDesign name="plussquare" size={30} color="tomato" />
+                <AntDesign name="plussquare" size={30} color={tomatoCustom} />
             </Link>
         </Vista>
     );
@@ -84,8 +83,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 16,
         fontFamily: "Poppins_400Regular",
-        backgroundColor: "tomato",
-        borderRadius: 5,
+        backgroundColor: tomatoCustom,
+        borderRadius: 20,
         width: "80%",
         alignSelf: "center",
     },

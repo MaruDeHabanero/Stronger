@@ -2,14 +2,14 @@ import { Stack, Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useColorSchemeListener } from "@/utils/colorSchemeListener";
-import Colors from "../../constants/Colors";
+import {Colors, tomatoCustom} from "../../constants/Colors";
 
 export default function TabLayout() {
     const colorScheme = useColorSchemeListener();
     return (
             <Tabs
                 screenOptions={{
-                    tabBarActiveTintColor: "tomato",
+                    tabBarActiveTintColor: tomatoCustom,
                     tabBarInactiveTintColor:
                         colorScheme === "dark"
                             ? Colors.tabsDark.tabBarInactiveTintColor

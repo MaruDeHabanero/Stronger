@@ -5,6 +5,7 @@
 
 const tintColorLight = "#000";
 const tintColorDark = "#fff";
+export const tomatoCustom = "#d95130";
 
 export const Colors = {
     light: {
@@ -45,6 +46,7 @@ export const Colors = {
             backgroundColor: "#f5f5f5",
         },
     },
+
 };
 
 export default Colors;

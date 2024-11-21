@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
-
+import { tomatoCustom } from "@/constants/Colors";
 import { Vista } from "@/components/Vista";
 import { Texto } from "@/components/Texto";
 
@@ -34,7 +34,7 @@ const Publicacion: React.FC<PublicacionProps> = ({
                     <FontAwesome
                         name={theme === "dark" ? "user-circle" : "user-circle-o"}
                         size={36}
-                        color={theme === "dark" ? "tomato" : "tomato"}
+                        color={theme === "dark" ? tomatoCustom : tomatoCustom}
                     />
                     <Texto style={styles.userName}>@{nombreUsuario}</Texto>
                 </Vista>

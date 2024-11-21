@@ -5,7 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import routinesData from "@/assets/dataPlantilla.json";
 import { Exercise, Set } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
-import Colors from "../constants/Colors";
+import {Colors, tomatoCustom} from "../constants/Colors";
 import { obtenerRutinaDetallada } from "@/services/DatabaseQueries"
 
 // Componentes para el modo oscuro y claro
@@ -48,11 +48,12 @@ export default function RoutineDetailScreen() {
     
 
     return (
-        <Vista style={{ display: "flex", height: "100%" }}>
-            <Texto style={[styles.routineText]}>{nombre ?? 'Nuevo entrenamiento vacío'}</Texto>
+        <Vista style={{ display: "flex", height: "100%", flex: 1 }}>
             <FlatList
                 data={ejercicios}
-                keyExtractor={(item, index) => index.toString()}
+                ListHeaderComponent={<Texto style={[styles.routineText]}>{nombre ?? 'Nuevo entrenamiento vacío'}</Texto>
+                }
+                keyExtractor={(item, index) => index.toString()}    
                 renderItem={({ item, index: exerciseIndex }) => (
                     <Vista style={styles.exerciseContainer}>
                         {/* Nombre del ejercicio */}
@@ -98,6 +99,8 @@ export default function RoutineDetailScreen() {
                                             />
                                             <Checkbox
                                                 style={styles.checkbox}
+                                                color={checkedStates[uniqueKey] ? tomatoCustom : undefined} // Cambia el fondo cuando está seleccionado
+
                                                 value={checkedStates[uniqueKey] ?? serie.hecho}
                                                 onValueChange={() => handleCheckboxChange(exerciseIndex, serieIndex)}
                                             />
@@ -105,7 +108,7 @@ export default function RoutineDetailScreen() {
                                     )
                                 }}
                             />
-                            <Texto style={{textAlign: 'center', marginBottom: 20}}>
+                            <Texto style={styles.agregarSerieButton}>
                                 Agregar serie
                             </Texto>
                         </Vista>
@@ -149,26 +152,27 @@ const styles = StyleSheet.create({
     },
     
     columnSerie: {
-        flex: 0.22,
+        width: 50,
         fontSize: 14,
         textAlign: "center",
     },
     columnSerieHeader: {
-        flex: 0.22,
-        fontSize: 14,
+        width:50,
+        fontSize: 16,
         textAlign: "center",
     },
     columnInput: {
-        backgroundColor: "lightgray",
-        opacity: 0.8,
+        backgroundColor: "#363636",
+        opacity: 1,
         textAlign: "center",
         flex: 1,
         borderWidth: 1,
-        borderColor: "#ddd",
+        borderColor: "#363636",
         padding: 8,
         marginHorizontal: 4,
-        borderRadius: 20,
+        borderRadius: 15,
         fontSize: 14,
+        color: 'white'
     },
     columnInputHeader: {
         flex: 1,
@@ -177,11 +181,20 @@ const styles = StyleSheet.create({
         marginHorizontal: 4,
     },
     checkbox: {
+        width:30,
+        height:30,
         marginHorizontal: 10,
+        borderRadius: 8,
+        borderColor:'tomato',
+        borderWidth: 1.7
     },
     columnCheckboxHeader: {
-        marginHorizontal: 18,
-
+       width:50,
     },
+    agregarSerieButton:{
+        textAlign: 'center', 
+        marginBottom: 20,
+        color: 'tomato'
+    }
 });
 
