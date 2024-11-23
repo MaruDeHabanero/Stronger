@@ -34,8 +34,7 @@ export default function RoutineDetailScreen() {
     const { theme } = useTheme();
     const colorTexto =
         theme === "dark" ? Colors.dark.text : Colors.light.text;
-
-   
+	const colorFondo = theme === "dark" ? Colors.dark.background : Colors.light.background;
 
     const [checkedStates, setCheckedStates] = useState<{ [key: string]: boolean }>({});
     const handleCheckboxChange = (exerciseIndex: number, serieIndex: number) => {
@@ -48,7 +47,7 @@ export default function RoutineDetailScreen() {
     
 
     return (
-        <Vista style={{ display: "flex", height: "100%", flex: 1 }}>
+        <Vista style={{ display: "flex", height: "100%", flex: 1, backgroundColor: colorFondo}}>
             <FlatList
                 data={ejercicios}
                 ListHeaderComponent={<Texto style={[styles.routineText]}>{nombre ?? 'Nuevo entrenamiento vacío'}</Texto>
@@ -88,14 +87,14 @@ export default function RoutineDetailScreen() {
                                                 {serie.numeroSerie}
                                             </Texto>
                                             <TextInput
-                                                style={[styles.columnInput, {textAlign: 'center'}]}
+                                                style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo}]}
                                                 keyboardType="numeric"
                                                 defaultValue={serie.peso?.toString()}
 												multiline
 												maxLength={4}
                                             />
                                             <TextInput
-                                                style={[styles.columnInput, {textAlign: 'center'}]}
+                                                style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo}]}
                                                 keyboardType="numeric"
                                                 defaultValue={serie.repeticiones?.toString()}
 												multiline
@@ -155,7 +154,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginBottom: 5,
     },
-    
     columnSerie: {
         width: 50,
         fontSize: 14,
@@ -167,11 +165,10 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     columnInput: {
-        backgroundColor: "#363636",
         opacity: 1,
         flex: 1,
         borderWidth: 1,
-        borderColor: "#363636",
+        borderColor: "grey",
         padding: 8,
         marginHorizontal: 4,
         borderRadius: 15,

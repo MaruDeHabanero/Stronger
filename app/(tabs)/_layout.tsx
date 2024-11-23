@@ -1,34 +1,37 @@
-import { Stack, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useColorSchemeListener } from "@/utils/colorSchemeListener";
-import {Colors, tomatoCustom} from "../../constants/Colors";
+import { Colors, tomatoCustom } from "../../constants/Colors";
+import { useTheme } from "@/utils/OscuroClaroContext";
 
 export default function TabLayout() {
-    const colorScheme = useColorSchemeListener();
+	const { theme } = useTheme();
     return (
+		<>
             <Tabs
                 screenOptions={{
                     tabBarActiveTintColor: tomatoCustom,
                     tabBarInactiveTintColor:
-                        colorScheme === "dark"
+                        theme === "dark"
                             ? Colors.tabsDark.tabBarInactiveTintColor
                             : Colors.tabsLight.tabBarInactiveTintColor,
                     headerStyle: {
-                        backgroundColor: colorScheme === "dark" ? Colors.dark.background : Colors.light.background,
+                        backgroundColor: theme === "dark" ? Colors.dark.background : Colors.light.background,
                     },
                     headerShadowVisible: false,
                     headerTintColor:
-                        colorScheme === "dark"
+                        theme === "dark"
                             ? Colors.dark.tint
                             : Colors.light.tint,
                     tabBarStyle: {
 						borderTopWidth: 0,
 						backgroundColor:
-							colorScheme === "dark"
+							theme === "dark"
 								? Colors.tabsDark.tabBarStyle.backgroundColor
 								: Colors.tabsLight.tabBarStyle.backgroundColor,
-					}
+					},
+					gestureEnabled: true,
+					gestureDirection: "horizontal",
                 }}
             >
                 <Tabs.Screen
@@ -96,5 +99,6 @@ export default function TabLayout() {
                     }}
                 />
             </Tabs>
+		</>
     );
 }
