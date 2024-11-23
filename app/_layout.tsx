@@ -14,14 +14,14 @@ import { Colors } from "@/constants/Colors";
 export default function RootLayout() {
   const { theme } = useTheme();
   const backgroundColor =
-    theme === "dark" ? Colors.dark.background : Colors.light.background;
-  const color = theme === "dark" ? Colors.dark.text : Colors.light.text;
+    theme === "dark" ? Colors.light.background : Colors.dark.background;
+  const color = theme === "dark" ? Colors.light.text : Colors.dark.text;
 
   const [loaded, error] = useFonts({
     Poppins_400Regular,
     Poppins_600SemiBold,
   });
-
+  
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
@@ -35,16 +35,23 @@ export default function RootLayout() {
   return (
     // El Theme Provider es el que se encarga de cambiar el tema de la aplicación
     <ThemeProvider>
-      <Stack>
+      <Stack
+	  	screenOptions={{
+				headerStyle: {
+					backgroundColor,
+				},
+				headerTitleStyle: {
+					color,
+				}
+		}}
+	  >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="entrenamiento"
           options={{
-            title: "Nuevo Entrenamiento",
+            title: "",
             presentation: "modal",
             headerTintColor: "white",
-            headerStyle: { backgroundColor },
-            headerTitleStyle: { color },
             gestureEnabled: true,
           }}
         />

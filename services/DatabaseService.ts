@@ -92,13 +92,16 @@ INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSerie
 (1, 1, 1, 3, 2),  -- Press de Banca
 (2, 1, 2, 3, 2),  -- Fondos en Paralelas
 (3, 1, 9, 3, 2),  -- Press de Tríceps en Polea Alta
-(4, 1, 10, 3, 1); -- Rompecráneos
+(4, 1, 10, 3, 1), -- Rompecráneos
+(5, 1, 4, 3, 2);  -- Elevaciones Laterales
+
 -- Rutina de Espalda y Bíceps
 INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSeries, idMetrica) VALUES
 (1, 2, 5, 3, 1),  -- Dominadas
 (3, 2, 6, 3, 1),  -- Remo con Barra
 (3, 2, 7, 3, 1),  -- Curl de Bíceps con Barra
 (4, 2, 8, 3, 1);  -- Curl Martillo
+
 -- Rutina de Piernas y Abdominales
 INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSeries, idMetrica) VALUES
 (1, 3, 11, 3, 1), -- Sentadillas con Barra

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, StyleSheet, FlatList, TextInput } from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput, Button} from "react-native";
 import Checkbox from 'expo-checkbox';
 import { useLocalSearchParams } from "expo-router";
 import routinesData from "@/assets/dataPlantilla.json";
 import { Exercise, Set } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
-import {Colors, tomatoCustom} from "../constants/Colors";
+import { Colors, tomatoCustom } from "../constants/Colors";
 import { obtenerRutinaDetallada } from "@/services/DatabaseQueries"
 
 // Componentes para el modo oscuro y claro
@@ -88,14 +88,18 @@ export default function RoutineDetailScreen() {
                                                 {serie.numeroSerie}
                                             </Texto>
                                             <TextInput
-                                                style={styles.columnInput}
+                                                style={[styles.columnInput, {textAlign: 'center'}]}
                                                 keyboardType="numeric"
                                                 defaultValue={serie.peso?.toString()}
+												multiline
+												maxLength={4}
                                             />
                                             <TextInput
-                                                style={styles.columnInput}
+                                                style={[styles.columnInput, {textAlign: 'center'}]}
                                                 keyboardType="numeric"
                                                 defaultValue={serie.repeticiones?.toString()}
+												multiline
+												maxLength={3}
                                             />
                                             <Checkbox
                                                 style={styles.checkbox}
@@ -108,8 +112,9 @@ export default function RoutineDetailScreen() {
                                     )
                                 }}
                             />
-                            <Texto style={styles.agregarSerieButton}>
-                                Agregar serie
+
+							<Texto style={styles.agregarSerieButton}>
+                                Agregar Serie
                             </Texto>
                         </Vista>
                     </Vista>
@@ -164,15 +169,14 @@ const styles = StyleSheet.create({
     columnInput: {
         backgroundColor: "#363636",
         opacity: 1,
-        textAlign: "center",
         flex: 1,
         borderWidth: 1,
         borderColor: "#363636",
         padding: 8,
         marginHorizontal: 4,
         borderRadius: 15,
-        fontSize: 14,
-        color: 'white'
+        fontSize: 16,
+        color: 'white',
     },
     columnInputHeader: {
         flex: 1,
@@ -193,7 +197,7 @@ const styles = StyleSheet.create({
     },
     agregarSerieButton:{
         textAlign: 'center', 
-        marginBottom: 20,
+        margin: 10,
         color: 'tomato'
     }
 });
