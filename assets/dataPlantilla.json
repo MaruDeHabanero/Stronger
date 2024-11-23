@@ -66,17 +66,22 @@
                 {
                     "numeroSerie": 1,
                     "repeticiones": 12,
-                    "peso": 50
+                    "peso": 50,
+                    "hecho": null
                 },
                 {
                     "numeroSerie": 2,
                     "repeticiones": 10,
-                    "peso": 55
+                    "peso": 55,
+                    "hecho": null
+
                 },
                 {
                     "numeroSerie": 3,
                     "repeticiones": 8,
-                    "peso": 60
+                    "peso": 60,
+                    "hecho": null
+
                 }
             ]
         },

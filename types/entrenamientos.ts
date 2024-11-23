@@ -7,12 +7,27 @@ export interface Set {
 }
 
 export interface Exercise {
+	idEjercicio: number,
 	nombre: string;
 	numeroSeries?: number;
 	orden?: number,
 	nota?: string;
 	series?: Set[],
 	sufijo?: string //Sufijo de la métrica del ejercicio
+}
+
+export interface ExerciseExplanation {
+    idEjercicio: number,
+    nombre: string,
+    descripcion: string,
+    idGrupoMuscular: number,
+	muscleGroup?: MuscleGroup,
+	pasos?: string
+}
+
+export interface MuscleGroup{
+	idGrupoMuscular: number,
+	nombre: string
 }
 
 export interface Routine {

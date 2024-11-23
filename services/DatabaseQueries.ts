@@ -1,5 +1,5 @@
 import { db } from './DatabaseService'; // Importa la instancia de la base de datos
-import { Exercise, Set, Routine } from "@/types/entrenamientos";
+import { Exercise, Set, Routine, ExerciseExplanation, MuscleGroup } from "@/types/entrenamientos";
 
 export function obtenerRutinas(): Routine[] {
     //Primero traemos las rutinas
@@ -20,7 +20,7 @@ export function obtenerRutinas(): Routine[] {
 export function obtenerRutinaDetallada(idRutina: string): Exercise[]{
     //Ahora primero obtenemos los ejercicios según la rutina
     let ejercicios: Exercise [] = db.getAllSync(`
-        Select e.nombre, orden, cm.sufijo from RutinaEjercicio re 
+        Select e.idEjercicio, e.nombre, orden, cm.sufijo from RutinaEjercicio re 
         join ejercicio e on e.idEjercicio = re.idEjercicio
         join CatMetrica cm on cm.idMetrica = re.idMetrica
         where re.idRutina = ${idRutina}
@@ -78,3 +78,18 @@ export function obtenerRutinaDetallada(idRutina: string): Exercise[]{
     });
     return ejercicios;
 }
+
+export function obtenerExplicacionDeEjercicio(idEjercicio: string): ExerciseExplanation {
+    //Primero traemos las rutinas
+    let exerciseExplanation: ExerciseExplanation = db.getFirstSync(`
+        Select idEjercicio, nombre, descripcion, idGrupoMuscular, pasos
+        from Ejercicio where idEjercicio = ${idEjercicio}
+        `) as ExerciseExplanation;
+
+    //Despues le anexamos los ejercicios con su cantidad de series
+    exerciseExplanation.muscleGroup = db.getFirstSync(`
+        Select idGrupoMuscular, nombre
+        from CatGrupoMuscular where idGrupoMuscular = ${exerciseExplanation.idGrupoMuscular}
+        `) as MuscleGroup; 
+    return exerciseExplanation;
+};
