@@ -12,10 +12,8 @@ import { useTheme } from "@/utils/OscuroClaroContext";
 import { Colors } from "@/constants/Colors";
 
 export default function RootLayout() {
-  const { theme } = useTheme();
-  const backgroundColor =
-    theme === "dark" ? Colors.light.background : Colors.dark.background;
-  const color = theme === "dark" ? Colors.light.text : Colors.dark.text;
+	const { theme } = useTheme();
+	const backgroundColor = theme === "dark" ? Colors.dark.background : Colors.light.background;
 
   const [loaded, error] = useFonts({
     Poppins_400Regular,
@@ -37,12 +35,9 @@ export default function RootLayout() {
     <ThemeProvider>
       <Stack
 	  	screenOptions={{
-				headerStyle: {
-					backgroundColor,
-				},
-				headerTitleStyle: {
-					color,
-				}
+			headerStyle: {
+				backgroundColor: backgroundColor,
+			}
 		}}
 	  >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -51,11 +46,11 @@ export default function RootLayout() {
           options={{
             title: "",
             presentation: "modal",
-            headerTintColor: "white",
             gestureEnabled: true,
           }}
         />
         <Stack.Screen name="+not-found" />
+		<Stack.Screen name="ejercicio" />
       </Stack>
     </ThemeProvider>
   );
