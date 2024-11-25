@@ -11,7 +11,6 @@ import { Vista } from "@/components/Vista";
 export default function Social() {
 	return (
 		<Vista style={styles.container}>
-			<Texto style={styles.title}>Feed</Texto>
 			<Feed posts={dataSocial.posts} />
 		</Vista>
 	);
