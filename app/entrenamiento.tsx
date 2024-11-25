@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, Text, StyleSheet, FlatList, TextInput, Button} from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput, Alert} from "react-native";
 import Checkbox from 'expo-checkbox';
 import { Link, useLocalSearchParams } from "expo-router";
 import routinesData from "@/assets/dataPlantilla.json";
@@ -7,13 +7,18 @@ import { Exercise, Set } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
 import { Colors, tomatoCustom } from "../constants/Colors";
 import { obtenerRutinaDetallada } from "@/services/DatabaseQueries"
+import { Button } from "react-native";
 
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
 import { Texto } from "@/components/Texto";
-
+import { Boton } from "@/components/Boton";
 
 export default function RoutineDetailScreen() {
+    const { theme } = useTheme();
+    const colorTexto = theme === "dark" ? Colors.dark.text : Colors.light.text;
+	const colorFondo = theme === "dark" ? Colors.dark.background : Colors.light.background;
+
     const { idRutina, nombre } = useLocalSearchParams();
     const [ejercicios, setEjercicios] = useState<Exercise[]>([]);
 
@@ -27,24 +32,48 @@ export default function RoutineDetailScreen() {
                 console.error("Error al obtener los ejercicios:", error);
             }
         };
-
         fetchEjercicios();
     }, [idRutina]);
 
-    const { theme } = useTheme();
-    const colorTexto =
-        theme === "dark" ? Colors.dark.text : Colors.light.text;
-	const colorFondo = theme === "dark" ? Colors.dark.background : Colors.light.background;
+    const handleInputChange = (exerciseIndex: number, serieIndex: number, field: "peso" | "repeticiones", value: string) => {
+        setEjercicios((prev) => {
+            const updatedExercises = [...prev];
+            const updatedSeries = updatedExercises[exerciseIndex].series ?? [];
+            const updatedSerie = { ...updatedSeries[serieIndex], [field]: value ? parseInt(value, 10) : null };
+            updatedSeries[serieIndex] = updatedSerie;
+            updatedExercises[exerciseIndex].series = updatedSeries;
+            return updatedExercises;
+        });
+    };
 
     const [checkedStates, setCheckedStates] = useState<{ [key: string]: boolean }>({});
-    const handleCheckboxChange = (exerciseIndex: number, serieIndex: number) => {
+    const handleCheckboxChange = (exerciseIndex: number, serieIndex: number, serie:Set) => {
         const uniqueKey = `${exerciseIndex}-${serieIndex}`;
-        setCheckedStates((prev) => ({
-            ...prev,
-            [uniqueKey]: !prev[uniqueKey], // Toggle the value
-        }));
+        if (serie.repeticiones == null) {
+            Alert.alert(
+                "Error ⚠️", // Título
+                "No puedes guardar una serie sin un número de repeticiones.", // Mensaje
+                [
+                  {
+                    text: "OK"
+                  }
+                ]
+              );
+            }else{
+            setCheckedStates((prev) => ({
+                ...prev,
+                [uniqueKey]: !prev[uniqueKey], // Toggle the value
+            }));
+        }
     };
-    
+
+    const agregarSerie = (series: Set[]) => {
+        let serie = series.at(-1);
+        if(serie){
+            serie.numeroSerie += 1;
+            series.push(serie);
+        }
+    }
 
     return (
         <Vista style={{ display: "flex", height: "100%", flex: 1, backgroundColor: colorFondo}}>
@@ -90,33 +119,38 @@ export default function RoutineDetailScreen() {
                                             </Texto>
                                             <TextInput
                                                 style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo}]}
+                                                multiline
+                                                maxLength={4}
                                                 keyboardType="numeric"
-                                                defaultValue={serie.peso?.toString()}
-												multiline
-												maxLength={4}
+                                                value={serie.peso?.toString() || ""}
+                                                onChangeText={(value) =>
+                                                    handleInputChange(exerciseIndex, serieIndex, "peso", value)
+                                                }
                                             />
                                             <TextInput
                                                 style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo}]}
+                                                multiline
+                                                maxLength={3}
                                                 keyboardType="numeric"
-                                                defaultValue={serie.repeticiones?.toString()}
-												multiline
-												maxLength={3}
+                                                value={serie.repeticiones?.toString() || ""}
+                                                onChangeText={(value) =>
+                                                    handleInputChange(exerciseIndex, serieIndex, "repeticiones", value)
+                                                }
                                             />
                                             <Checkbox
                                                 style={styles.checkbox}
                                                 color={checkedStates[uniqueKey] ? tomatoCustom : undefined} // Cambia el fondo cuando está seleccionado
 
                                                 value={checkedStates[uniqueKey] ?? serie.hecho}
-                                                onValueChange={() => handleCheckboxChange(exerciseIndex, serieIndex)}
+                                                onValueChange={() => handleCheckboxChange(exerciseIndex, serieIndex, serie)}
                                             />
                                         </Vista>
                                     )
                                 }}
                             />
-
-							<Texto style={styles.agregarSerieButton}>
+                            <Boton style={styles.agregarSerieButton} onPress={() => agregarSerie(item.series! )}>
                                 Agregar Serie
-                            </Texto>
+                            </Boton>
                         </Vista>
                     </Vista>
                 )}

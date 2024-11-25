@@ -9,7 +9,6 @@ import Colors from "@/constants/Colors";
 import { Vista } from "@/components/Vista";
 import * as images from "../assets/images/exercisesGifs";
 
-
 export default function notFound() {
     const { idEjercicio } = useLocalSearchParams();
     const [ejercicio, setEjercicios] = useState<ExerciseExplanation>();
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
     modalTitle: {
         fontSize: 30,
         fontWeight: "bold",
-        marginBottom: 10,
     },
     modalDescription: {
         fontSize: 16,

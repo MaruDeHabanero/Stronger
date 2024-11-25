@@ -7,7 +7,8 @@ import {
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { ThemeProvider, useTheme } from "@/utils/OscuroClaroContext";
-import { Colors } from "@/constants/Colors";
+import { Colors, tomatoCustom } from "@/constants/Colors";
+import { Button } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,16 +46,21 @@ function AppLayout() {
 				}}
 			>
 				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-				<Stack.Screen
-					name="entrenamiento"
-					options={{
-						title: "",
-						presentation: "modal",
-						gestureEnabled: true,
-						animation: "slide_from_bottom",
-						gestureDirection: "vertical",
-					}}
-				/>
+				<Stack.Screen name="entrenamiento" options={{
+					headerTitle: "Entrenamiento", 
+					presentation: "modal", 
+					gestureEnabled: true,
+					animation: "slide_from_bottom",
+					gestureDirection: "vertical",
+					headerTintColor: 'white',
+					// headerTitleStyle: { color: 'white' }, headerRight: () => (
+					// 	<Button
+					// 		onPress={() => alert('Botón presionado')}
+					// 		title="Terminar"
+					// 		color={tomatoCustom}
+					// 	/>
+					// ),
+				}} />
 				<Stack.Screen name="+not-found" />
 				<Stack.Screen name="ejercicio" />
 			</Stack>

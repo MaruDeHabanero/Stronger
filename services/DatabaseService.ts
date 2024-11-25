@@ -1,3 +1,4 @@
+import { Exercise } from '@/types/entrenamientos';
 import * as SQLite from 'expo-sqlite';
 export const db = SQLite.openDatabaseSync('test.db');
 
@@ -140,4 +141,3 @@ CREATE TABLE IF NOT EXISTS SesionEjercicioSerie(
 );
 `
 );
-
