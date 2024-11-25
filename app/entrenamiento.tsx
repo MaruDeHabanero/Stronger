@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, StyleSheet, FlatList, TextInput, Button} from "react-native";
 import Checkbox from 'expo-checkbox';
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import routinesData from "@/assets/dataPlantilla.json";
 import { Exercise, Set } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
@@ -15,13 +15,13 @@ import { Texto } from "@/components/Texto";
 
 export default function RoutineDetailScreen() {
     const { idRutina, nombre } = useLocalSearchParams();
-    const [ejercicios, setEjercicios] = useState<any>([]);
+    const [ejercicios, setEjercicios] = useState<Exercise[]>([]);
 
     // Usamos useEffect para realizar la llamada a la base de datos solo una vez cuando el componente se monta
     useEffect(() => {
         const fetchEjercicios = async () => {
             try {
-                const result = await obtenerRutinaDetallada(idRutina.toString());
+                const result:Exercise[] = await obtenerRutinaDetallada(idRutina.toString());
                 setEjercicios(result); // Almacenamos los datos obtenidos
             } catch (error) {
                 console.error("Error al obtener los ejercicios:", error);
@@ -56,7 +56,9 @@ export default function RoutineDetailScreen() {
                 renderItem={({ item, index: exerciseIndex }) => (
                     <Vista style={styles.exerciseContainer}>
                         {/* Nombre del ejercicio */}
-                        <Texto style={styles.exerciseText}>{item.nombre}</Texto>
+                        <Link href={`../ejercicio?idEjercicio=${item.idEjercicio}`} style={{ marginBottom: 8 }}>
+                            <Texto style={styles.exerciseText}>{item.nombre}</Texto>
+                        </Link>
 
                         {/* Nota opcional */}
                         {item?.nota && (
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     },
     exerciseText: {
         fontSize: 20,
-        marginBottom: 2,
+        color: tomatoCustom
     },
     noteExcerciseText: {
         fontSize: 16,
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
         height:30,
         marginHorizontal: 10,
         borderRadius: 8,
-        borderColor:'tomato',
+        borderColor: tomatoCustom,
         borderWidth: 1.7
     },
     columnCheckboxHeader: {
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
     agregarSerieButton:{
         textAlign: 'center', 
         margin: 10,
-        color: 'tomato'
+        color: tomatoCustom
     }
 });
 
