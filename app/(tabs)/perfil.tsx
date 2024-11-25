@@ -10,7 +10,7 @@ export default function Perfil() {
 
     return (
         <View style={[styles.container, {backgroundColor}]}>
-            <Text style={[{color}]}>Blank</Text>
+            <Text style={[{color}]}>Error 404. Módulo en desarrollo 👷</Text>
         </View>
     );
 }
