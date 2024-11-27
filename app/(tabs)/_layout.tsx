@@ -29,9 +29,7 @@ export default function TabLayout() {
 							theme === "dark"
 								? Colors.tabsDark.tabBarStyle.backgroundColor
 								: Colors.tabsLight.tabBarStyle.backgroundColor,
-					},
-					gestureEnabled: true,
-					gestureDirection: "horizontal",
+					}
                 }}
             >
                 <Tabs.Screen

@@ -7,7 +7,7 @@ import { Exercise, Set } from "@/types/entrenamientos";
 import { useTheme } from "@/utils/OscuroClaroContext";
 import { Colors, tomatoCustom } from "../constants/Colors";
 import { obtenerRutinaDetallada } from "@/services/DatabaseQueries"
-import { Button } from "react-native";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 // Componentes para el modo oscuro y claro
 import { Vista } from "@/components/Vista";
@@ -85,8 +85,9 @@ export default function RoutineDetailScreen() {
                 renderItem={({ item, index: exerciseIndex }) => (
                     <Vista style={styles.exerciseContainer}>
                         {/* Nombre del ejercicio */}
-                        <Link href={`../ejercicio?idEjercicio=${item.idEjercicio}`} style={{ marginBottom: 8 }}>
-                            <Texto style={styles.exerciseText}>{item.nombre}</Texto>
+                        <Link href={`../ejercicio?idEjercicio=${item.idEjercicio}`} style={styles.linkEjercicio}>
+                            <Texto style={styles.exerciseText}>{item.nombre}{"  "}</Texto>
+							<MaterialIcons name="info-outline" size={20} color={tomatoCustom} />
                         </Link>
 
                         {/* Nota opcional */}
@@ -232,6 +233,10 @@ const styles = StyleSheet.create({
         textAlign: 'center', 
         margin: 10,
         color: tomatoCustom
-    }
+    },
+	linkEjercicio :{
+		marginTop: 10, 
+		marginBottom: 15, 
+	}
 });
 

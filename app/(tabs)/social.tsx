@@ -1,10 +1,6 @@
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
-import { useColorSchemeListener } from "@/utils/colorSchemeListener"; // Importar el hook
-import Colors from "../../constants/Colors";
-import { useTheme } from '@/utils/OscuroClaroContext';
+import { StyleSheet } from "react-native";
 import Feed from "@/components/Social/Feed";
 import dataSocial from "@/assets/dataSocial.json";
-import { Texto } from "@/components/Texto";
 
 import { Vista } from "@/components/Vista";
 

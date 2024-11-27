@@ -62,7 +62,12 @@ function AppLayout() {
 					// ),
 				}} />
 				<Stack.Screen name="+not-found" />
-				<Stack.Screen name="ejercicio" />
+				<Stack.Screen name="ejercicio" options={{
+					headerTitle: "Ejercicio",
+					presentation: "modal",
+					gestureEnabled: true,
+					animation: "slide_from_left",
+				}} />
 			</Stack>
 		</>
 	);
