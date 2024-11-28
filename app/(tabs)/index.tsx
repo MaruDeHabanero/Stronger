@@ -13,15 +13,13 @@ import { Texto } from "@/components/Texto";
 export default function Index() {
     const { theme } = useTheme();
 
-    const plantillaBorder =
-        theme === "dark" ? Colors.light.background : Colors.dark.background;
-
+ 
     //const routines = routinesData.rutinas as Routine[];
 
-    const routines = queries.obtenerRutinas();
+    let routines = queries.obtenerRutinas();
 
     const renderRoutine = ({ item }: { item: Routine }) => (
-		<Vista style={[styles.square, {borderColor: plantillaBorder}]}>
+		<Vista style={[styles.square]}>
 			<Link href={`/entrenamiento?idRutina=${item.idRutina}&nombre=${item.nombre}`}>
 					<Texto style={[styles.subtitle, {fontSize: 25}]}>
 						{item.nombre}{"\n"}
@@ -44,20 +42,20 @@ export default function Index() {
     return (
         <Vista style={styles.container}>
             <Texto style={styles.title}>Stronger</Texto>
-            <Link href="/entrenamiento" style={styles.nuevoEntrenamiento}>
-                Nuevo Entrenamiento
-            </Link>
-            <Texto style={styles.subtitle}>Plantillas</Texto>
-            <Vista style={styles.plantillaBox}>
-                <FlatList
-                    data={routines}
-                    keyExtractor={(item) => item.nombre}
-                    renderItem={renderRoutine}
-                />
-            </Vista>
-            <Link href="/entrenamiento" style={styles.plusSign}>
-                <AntDesign name="plussquare" size={30} color={tomatoCustom} />
-            </Link>
+            <View style={styles.botonesNuevoAgrega}>
+                <Link href="/entrenamiento" style={styles.nuevoEntrenamiento}>
+                    Nuevo Entrenamiento
+                </Link>
+                <Link href="/ejercicios" style={styles.nuevoEntrenamiento}>
+                    Nueva Rutina
+                </Link>
+            </View>
+            <Texto style={styles.subtitle}>Rutinas</Texto>
+            <FlatList
+                data={routines}
+                keyExtractor={(item) => item.nombre}
+                renderItem={renderRoutine}
+            />
         </Vista>
     );
 }
@@ -68,6 +66,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         height: "100%",
         padding: 20,
+        paddingBottom:0,
     },
     title: {
         fontSize: 50,
@@ -77,17 +76,6 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontFamily: "Poppins_400Regular",
         marginTop: 20,
-    },
-    nuevoEntrenamiento: {
-        padding: 12,
-        marginTop: 20,
-        textAlign: "center",
-        fontSize: 16,
-        fontFamily: "Poppins_400Regular",
-        backgroundColor: tomatoCustom,
-        borderRadius: 20,
-        width: "80%",
-        alignSelf: "center",
     },
     plusSign: {
         marginTop: 5,
@@ -100,9 +88,25 @@ const styles = StyleSheet.create({
     square: {
         borderRadius: 8,
 		borderWidth: 1,
-		marginVertical: 5,
-		paddingTop: 10,
-		paddingBottom: 20,
-		paddingHorizontal: 15,
+        borderColor: tomatoCustom,
+        margin:10,
+		padding: 15,
+    },
+    botonesNuevoAgrega:{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    nuevoEntrenamiento: {
+        padding: 15,
+        textAlign: "center",
+        fontFamily: "Poppins_400Regular",
+        backgroundColor: tomatoCustom,
+        borderRadius: 20,
+        width: "47%",
+        alignSelf: "center",
+        marginHorizontal: 5,
+        color: "white",
+        fontWeight:"bold"
     },
 });

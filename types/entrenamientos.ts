@@ -22,7 +22,8 @@ export interface ExerciseExplanation {
     descripcion: string,
     idGrupoMuscular: number,
 	muscleGroup?: MuscleGroup,
-	pasos?: string
+	pasos?: string,
+	orden?: number
 }
 
 export interface MuscleGroup{

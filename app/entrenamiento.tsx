@@ -20,14 +20,18 @@ export default function RoutineDetailScreen() {
 	const colorFondo = theme === "dark" ? Colors.dark.background : Colors.light.background;
 
     const { idRutina, nombre } = useLocalSearchParams();
-    const [ejercicios, setEjercicios] = useState<Exercise[]>([]);
+    let [ejercicios, setEjercicios] = useState<Exercise[]>([]);
+    const [iterador, aumentarIterador] = useState<number>(1);
 
     // Usamos useEffect para realizar la llamada a la base de datos solo una vez cuando el componente se monta
     useEffect(() => {
         const fetchEjercicios = async () => {
             try {
-                const result:Exercise[] = await obtenerRutinaDetallada(idRutina.toString());
-                setEjercicios(result); // Almacenamos los datos obtenidos
+                if(idRutina){
+                    const result:Exercise[] = await obtenerRutinaDetallada(idRutina.toString());
+                    console.log(result)
+                    setEjercicios(result); // Almacenamos los datos obtenidos
+                }
             } catch (error) {
                 console.error("Error al obtener los ejercicios:", error);
             }
@@ -74,20 +78,41 @@ export default function RoutineDetailScreen() {
             series.push(serie);
         }
     }
+    const agregarEjercicio = () =>{
+            const fetchEjercicios = async () => {
+                try {
+                    aumentarIterador(iterador+1);
+                    console.log(iterador);
+                    const result:Exercise[] = await obtenerRutinaDetallada("1");
+                    ejercicios.push(result[iterador])
+                    setEjercicios(ejercicios); // Almacenamos los datos obtenidos
+                } catch (error) {
+                    console.error("Error al obtener los ejercicios:", error);
+                }
+            };
+            fetchEjercicios();
+    }
 
     return (
         <Vista style={{ display: "flex", height: "100%", flex: 1, backgroundColor: colorFondo}}>
             <FlatList
                 data={ejercicios}
-                ListHeaderComponent={<Texto style={[styles.routineText]}>{nombre ?? 'Nuevo entrenamiento vacío'}</Texto>
+                ListHeaderComponent={
+                    <Texto style={[styles.routineText]}>{nombre ?? 'Nuevo entrenamiento vacío'}</Texto>
+                }
+                ListFooterComponent={
+                    <Boton style={styles.agregarEjercicioButton} onPress={() => {agregarEjercicio() }}>
+                        Agregar Ejercicio
+                    </Boton>
                 }
                 keyExtractor={(item, index) => index.toString()}    
                 renderItem={({ item, index: exerciseIndex }) => (
                     <Vista style={styles.exerciseContainer}>
                         {/* Nombre del ejercicio */}
                         <Link href={`../ejercicio?idEjercicio=${item.idEjercicio}`} style={styles.linkEjercicio}>
-                            <Texto style={styles.exerciseText}>{item.nombre}{"  "}</Texto>
-							<MaterialIcons name="info-outline" size={20} color={tomatoCustom} />
+                            <Texto style={styles.exerciseText}>{item.nombre}{" "}</Texto>
+                            <MaterialIcons  name="info-outline" size={20} color={tomatoCustom} />
+
                         </Link>
 
                         {/* Nota opcional */}
@@ -119,7 +144,7 @@ export default function RoutineDetailScreen() {
                                                 {serie.numeroSerie}
                                             </Texto>
                                             <TextInput
-                                                style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo}]}
+                                                style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo, color:colorTexto}]}
                                                 multiline
                                                 maxLength={4}
                                                 keyboardType="numeric"
@@ -129,7 +154,7 @@ export default function RoutineDetailScreen() {
                                                 }
                                             />
                                             <TextInput
-                                                style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo}]}
+                                                style={[styles.columnInput, {textAlign: 'center'}, {backgroundColor: colorFondo, color:colorTexto}]}
                                                 multiline
                                                 maxLength={3}
                                                 keyboardType="numeric"
@@ -234,9 +259,15 @@ const styles = StyleSheet.create({
         margin: 10,
         color: tomatoCustom
     },
+    agregarEjercicioButton:{
+        textAlign: 'center', 
+        margin: 10,
+        marginBottom:50,
+        color: tomatoCustom
+    },
 	linkEjercicio :{
-		marginTop: 10, 
-		marginBottom: 15, 
+        marginTop: 10,
+        marginBottom: 15
 	}
 });
 

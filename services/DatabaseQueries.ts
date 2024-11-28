@@ -93,3 +93,20 @@ export function obtenerExplicacionDeEjercicio(idEjercicio: string): ExerciseExpl
         `) as MuscleGroup; 
     return exerciseExplanation;
 };
+
+export function obtenerEjerciciosExplicados(): ExerciseExplanation[] {
+    //Primero traemos las rutinas
+    let exerciseExplanation: ExerciseExplanation[] = db.getAllSync(`
+        Select idEjercicio, nombre, descripcion, idGrupoMuscular, pasos
+        from Ejercicio
+        `) as ExerciseExplanation[];
+
+    //Despues le anexamos los ejercicios con su cantidad de series
+    exerciseExplanation.map(ex => {
+        ex.muscleGroup = db.getFirstSync(`
+            Select idGrupoMuscular, nombre
+            from CatGrupoMuscular where idGrupoMuscular = ${ex.idGrupoMuscular}
+            `) as MuscleGroup; 
+    });
+    return exerciseExplanation;
+};

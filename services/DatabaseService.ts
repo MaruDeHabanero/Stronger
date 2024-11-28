@@ -75,7 +75,8 @@ CREATE TABLE IF NOT EXISTS Rutina(
 INSERT OR IGNORE INTO Rutina (nombre) VALUES
 ('Rutina de Pecho y Tríceps'),
 ('Rutina de Espalda y Bíceps'),
-('Rutina de Piernas y Abdominales');
+('Rutina de Piernas y Abdominales'),
+('Rutina Full Body');
 
 -- Almacena los ejericicios por rutina y cuántas series de cada uno
 CREATE TABLE IF NOT EXISTS RutinaEjercicio(
@@ -110,6 +111,13 @@ INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSerie
 (3, 3, 12, 3, 2), -- Prensa de Piernas
 (3, 3, 19, 3, 2), -- Crunch
 (4, 3, 20, 3, 1); -- Plancha
+
+INSERT OR IGNORE INTO RutinaEjercicio (orden, idRutina, idEjercicio, numeroSeries, idMetrica) VALUES
+(1, 4, 1, 3, 2),  -- Press de Banca
+(2, 4, 5, 3, 1),  -- Dominadas
+(3, 4, 11, 3, 1), -- Sentadillas con Barra
+(4, 4, 15, 3, 1), -- Hip Thrust
+(5, 4, 17, 3, 2); -- Elevación de Talones de Pie
 
 CREATE TABLE IF NOT EXISTS Sesion(
     idSesion INTEGER PRIMARY KEY AUTOINCREMENT,

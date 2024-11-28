@@ -8,14 +8,15 @@ interface BotonComponentProps {
     children: React.ReactNode;
     style?: TextStyle | TextStyle[];
     onPress?: () => void; // Propiedad onPress
+    onPressOut?: () => void;
 }
 
-export const Boton: React.FC<BotonComponentProps> = ({ children, style, onPress }) => {
+export const Boton: React.FC<BotonComponentProps> = ({ children, style, onPress, onPressOut }) => {
     const { theme } = useTheme();
     const color = theme === "dark" ? Colors.dark.text : Colors.light.text;
 
     return (
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} onPressOut={onPressOut}>
             <Text style={[styles.default, { color }, style]}>{children}</Text>
         </TouchableOpacity>
     );
