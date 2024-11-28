@@ -1,26 +1,59 @@
-import { Text, View, StyleSheet } from "react-native";
-import { useColorSchemeListener } from "@/utils/colorSchemeListener"; // Importar el hook
-import Colors from "../../constants/Colors";
-import { useTheme } from '@/utils/OscuroClaroContext';
+import React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { useTheme } from "@/utils/OscuroClaroContext";
+import { Colors } from "@/constants/Colors";
+import HeaderPerfil from "@/components/Perfil/HeaderPerfil";
+import TabsPerfil from "@/components/Perfil/TabsPerfil";
+import Feed from "@/components/Social/Feed";
+import dataPerfil from "@/assets/dataPerfil.json";
+import { Texto } from "@/components/Texto";
 
-export default function Perfil() {
+const PerfilScreen = () => {
 	const { theme } = useTheme();
-	const backgroundColor = theme === "dark" ? Colors.dark.background : Colors.light.background;
-	const color = theme === "dark" ? Colors.dark.text : Colors.light.text;
+	const backgroundColor =
+		theme === "dark" ? Colors.dark.background : Colors.light.background;
 
-    return (
-        <View style={[styles.container, {backgroundColor}]}>
-            <Text style={[{color}]}>Error 404. Módulo en desarrollo 👷</Text>
-        </View>
-    );
-}
+	// Datos del usuario obtenidos del JSON
+	const user = {
+		username: "@Bass19",
+		entrenamientosCompletados: 235,
+		siguiendo: 24,
+		seguidores: 10,
+		posts: dataPerfil.posts, // Aquí asignamos los posts del JSON
+	};
+
+	return (
+		<FlatList
+			data={user.posts}
+			keyExtractor={(item) => item.id.toString()}
+			ListHeaderComponent={
+				<>
+					<Texto style={styles.title}>Perfil</Texto>
+					<HeaderPerfil
+						username={user.username}
+						entrenamientosCompletados={
+							user.entrenamientosCompletados
+						}
+						siguiendo={user.siguiendo}
+						seguidores={user.seguidores}
+					/>
+					<TabsPerfil />
+				</>
+			}
+			renderItem={({ item }) => <Feed posts={[item]} />}
+			contentContainerStyle={[styles.container, { backgroundColor }]}
+		/>
+	);
+};
 
 const styles = StyleSheet.create({
-    container: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center", 
-        height: "100%",
-    },
+	container: {
+		padding: 20,
+	},
+	title: {
+		fontSize: 50,
+		fontFamily: "Poppins_600SemiBold",
+	},
 });
+
+export default PerfilScreen;

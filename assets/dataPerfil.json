@@ -1,0 +1,85 @@
+{
+	"posts": [
+	  {
+		"id": 6,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 30 minutos",
+		"textoPost": "¡Día de pecho! Press inclinado con 80Kg para 10 repeticiones.",
+		"ejercicio": "Press Inclinado",
+		"peso": 80,
+		"unidades": "Kg",
+		"repeticiones": 10,
+		"likes": 20
+	  },
+	  {
+		"id": 1,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 3 horas",
+		"textoPost": "Rompí mi récord en press de banca! Levanté 100Kg a 4 repeticiones!",
+		"ejercicio": "Press de Banca",
+		"peso": 100,
+		"unidades": "Kg",
+		"repeticiones": 4,
+		"likes": 25
+	  },
+	  {
+		"id": 2,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 3 horas",
+		"textoPost": "Acabo de hacer 15 repeticiones en sentadilla libre con barra cargando 110Kg!",
+		"ejercicio": "Sentadilla Libre",
+		"peso": 110,
+		"unidades": "Kg",
+		"repeticiones": 15,
+		"likes": 40,
+		"imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F6sZQNpkYcP8%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=631bdf37493ddb9ce2be8e809be1eb0d4481a71f7c255ad830d4a1d2c7ac80ae&ipo=images"
+	  },
+	  {
+		"id": 7,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 4 horas",
+		"textoPost": "Trabajando en mis brazos: curls en máquina con 40Kg, 12 repeticiones por serie.",
+		"ejercicio": "Curls en Máquina",
+		"peso": 40,
+		"unidades": "Kg",
+		"repeticiones": 12,
+		"likes": 30
+	  },
+	  {
+		"id": 3,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 1 hora",
+		"textoPost": "¡Logré un PR en peso muerto hoy! Levanté 150Kg por 3 repeticiones.",
+		"ejercicio": "Peso Muerto",
+		"peso": 150,
+		"unidades": "Kg",
+		"repeticiones": 3,
+		"likes": 60,
+		"imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F5k-WaIIPxa8%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=ffc6cb459d4a5df88370634ec5fca87bcf9498ca054063327e6caa030a7b9750&ipo=images"
+	  },
+	  {
+		"id": 4,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 2 horas",
+		"textoPost": "Día de espalda: dominadas asistidas y jalones en máquina. ¡15 repeticiones con 80Kg!",
+		"ejercicio": "Jalones en Máquina",
+		"peso": 80,
+		"unidades": "Kg",
+		"repeticiones": 15,
+		"likes": 35
+	  },
+	  {
+		"id": 5,
+		"nombreUsuario": "Bass19",
+		"tiempoDesde": "Hace 5 horas",
+		"textoPost": "¡Progreso en el press militar! Levanté 50Kg por 8 repeticiones.",
+		"ejercicio": "Press Militar",
+		"peso": 50,
+		"unidades": "Kg",
+		"repeticiones": 8,
+		"likes": 45,
+		"imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2FmSEtaQpMNUs%2Fmaxresdefault.jpg&f=1&nofb=1&ipt=40a84da694309b88562259790daf79784bcbe31ca0567f0162e46764eb90d257&ipo=images"
+	  }
+	]
+  }
+  

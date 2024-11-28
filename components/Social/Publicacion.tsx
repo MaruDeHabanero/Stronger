@@ -34,7 +34,7 @@ const Publicacion: React.FC<PublicacionProps> = ({
                     <FontAwesome
                         name={theme === "dark" ? "user-circle" : "user-circle-o"}
                         size={36}
-                        color={theme === "dark" ? tomatoCustom : tomatoCustom}
+                        color={tomatoCustom}
                     />
                     <Texto style={styles.userName}>@{nombreUsuario}</Texto>
                 </Vista>
